@@ -1,38 +1,56 @@
 import React, { createContext, useReducer } from 'react'
+import data, { nameToIndex } from './constants'
+import u from 'updeep'
 
 const initialState = {
-  loading: true,
-  buildings: {
-    field: 0,
-  },
-  resources: {
-    food: 0,
-  },
+  loading: false,
+  ...data,
 }
 
 const reducer = (state, action) => {
-  if (action.type === 'INCREMENT_RESOURCE') {
-    const { name, value } = action.payload
-    console.log(name, value)
-    return {
-      ...state,
-      resources: {
-        ...state.resources,
-        [name]: state.resources[name] + value,
-      },
-    }
+  if (action.type === 'TICK') {
+    const foodPerTick =
+      state.buildings[0].effects.foodPerTick * state.buildings[0].value
+
+    return u(updateResources({ food: foodPerTick }), state)
   }
+
+  if (action.type === 'GATHER_FOOD') {
+    return u(updateResources({ food: 1 }), state)
+  }
+
   if (action.type === 'BUY_BUILDING') {
-    const { name, value } = action.payload
-    return {
-      ...state,
-      buildings: {
-        ...state.buildings,
-        [name]: state.buildings[name] + value,
+    const { name, value, cost } = action.payload
+    console.log(action.payload)
+    return u(
+      {
+        ...updateBuildings({ [name]: value }),
+        ...updateResources(cost),
       },
-    }
+      state
+    )
   }
   return state
+}
+
+const updateSlice = (key, updates) => {
+  const updateToPush = { [key]: {} }
+
+  Object.keys(updates).forEach(resourceName => {
+    const amount = updates[resourceName]
+    const index = nameToIndex[key][resourceName]
+    updateToPush[key][index] = { value: i => i + amount }
+  })
+
+  return updateToPush
+}
+
+const updateResources = updates => updateSlice('resources', updates)
+const updateBuildings = updates => updateSlice('buildings', updates)
+
+const getNextCost = building => {
+  const { amount, ratio } = building.prices[0]
+  return amount * Math.pow(ratio, building.value)
 }
 
 const StoreContext = createContext(initialState)
@@ -53,7 +71,7 @@ const connect = (mapStateToProps, mapDispatchToProps) => Component => props => (
       <Component
         {...props}
         {...mapStateToProps(state, props)}
-        {...mapDispatchToProps(dispatch, props)}
+        {...mapDispatchToProps(dispatch, props, state)}
       />
     )}
   </StoreContext.Consumer>
