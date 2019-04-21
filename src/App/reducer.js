@@ -59,9 +59,20 @@ const updateSlice = (key, updates) => {
   Object.keys(updates).forEach(resourceName => {
     const amount = updates[resourceName]
     const index = nameToIndex[key][resourceName]
-    updateToPush[key][index] = { value: i => i + amount }
-  })
+    updateToPush[key][index] = resource => {
+      let newValue = resource.value + amount
 
+      // Enforce max if present
+      if (typeof resource.max !== 'undefined' && newValue > resource.max) {
+        newValue = resource.max
+      }
+
+      return {
+        ...resource,
+        value: newValue,
+      }
+    }
+  })
   return updateToPush
 }
 

@@ -4,6 +4,7 @@ export default {
       // title, type(common, rare, etc), visible, calculatePerTick, color
       name: 'food',
       value: 0,
+      max: 5000,
     },
   ],
   buildings: [

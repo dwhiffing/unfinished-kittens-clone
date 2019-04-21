@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Resource = ({ name, value }) => (
+const Resource = ({ name, value, max }) => (
   <div>
     <p>
-      <span>{name}</span>: <span>{value.toFixed(2)}</span>
+      {name}: {value.toFixed(2)} / {max}
     </p>
   </div>
 )
@@ -15,6 +15,7 @@ const Resources = ({ resources }) => (
         key={`resource-${resource.name}`}
         name={resource.name}
         value={resource.value}
+        max={resource.max}
       />
     ))}
   </div>
