@@ -6,9 +6,10 @@ const Command = ({ name, onClick }) => (
   </div>
 )
 
-const Commands = ({ gatherFood }) => (
+const Commands = ({ gatherFood, reset }) => (
   <div className="flex flex-column">
     <Command name="Gather food" onClick={gatherFood} />
+    <Command name="Reset" onClick={reset} />
   </div>
 )
 

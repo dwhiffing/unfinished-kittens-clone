@@ -7,6 +7,7 @@ const mapStateToProps = ({ loading, resources }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  reset: () => dispatch({ type: 'RESET' }),
   save: () => dispatch({ type: 'SAVE' }),
   load: () => dispatch({ type: 'LOAD' }),
   tick: () => dispatch({ type: 'TICK' }),

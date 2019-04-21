@@ -12,8 +12,18 @@ const reducer = (state, action) => {
     return state
   }
 
+  if (action.type === 'RESET') {
+    const shouldReset = window.confirm('sure?')
+    if (shouldReset) {
+      localStorage.removeItem('save')
+      document.location.reload()
+    }
+    return state
+  }
+
   if (action.type === 'LOAD') {
-    const save = JSON.parse(localStorage.getItem('save') || '{}')
+    const saveString = localStorage.getItem('save')
+    const save = saveString ? JSON.parse(saveString) : data
     return u({ ...save, loading: false }, state)
   }
 
