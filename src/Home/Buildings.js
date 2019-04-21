@@ -1,5 +1,16 @@
 import React from 'react'
 
+const getNextCost = (building, { negated = false } = {}) => {
+  const obj = {}
+
+  building.prices.forEach(price => {
+    const amount = price.amount * Math.pow(price.ratio, building.value)
+    obj[price.name] = negated ? -amount : amount
+  })
+
+  return obj
+}
+
 const Slat = ({ label, onClick, color = 'white' }) => (
   <div onClick={onClick}>
     <p style={{ color }}>{label}</p>
@@ -8,7 +19,7 @@ const Slat = ({ label, onClick, color = 'white' }) => (
 
 const Buildings = ({ resources, buildings, buyBuilding }) =>
   buildings.map(building => {
-    const foodCost = building.getNextCost().food
+    const foodCost = getNextCost(building).food
     const canAfford = resources[0].value >= foodCost
     return (
       <Slat
@@ -22,7 +33,7 @@ const Buildings = ({ resources, buildings, buyBuilding }) =>
           buyBuilding({
             name: building.name,
             value: 1,
-            cost: building.getNextCost({ negated: true }),
+            cost: getNextCost(building, { negated: true }),
           })
         }
       />

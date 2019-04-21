@@ -7,9 +7,18 @@ import Commands from './components/Commands'
 import Resources from './components/Resources'
 import { TICK_DURATION } from './utils/constants'
 
-const AppView = ({ tick, gatherFood, resources }) => {
+const AppView = ({ save, load, tick, gatherFood, loading, resources }) => {
+  if (loading) {
+    load()
+    return false
+  }
+
   useEffect(() => {
     setInterval(tick, TICK_DURATION)
+  }, [])
+
+  useEffect(() => {
+    setInterval(save, TICK_DURATION)
   }, [])
 
   return (

@@ -18,16 +18,6 @@ export default {
           ratio: 1.12,
         },
       ],
-      getNextCost({ negated = false } = {}) {
-        const obj = {}
-
-        this.prices.forEach(price => {
-          const amount = price.amount * Math.pow(price.ratio, this.value)
-          obj[price.name] = negated ? -amount : amount
-        })
-
-        return obj
-      },
       effects: {
         foodPerTick: 0.125,
       },
