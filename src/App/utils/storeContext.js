@@ -48,11 +48,6 @@ const updateSlice = (key, updates) => {
 const updateResources = updates => updateSlice('resources', updates)
 const updateBuildings = updates => updateSlice('buildings', updates)
 
-const getNextCost = building => {
-  const { amount, ratio } = building.prices[0]
-  return amount * Math.pow(ratio, building.value)
-}
-
 const StoreContext = createContext(initialState)
 
 const StoreProvider = ({ children }) => {
