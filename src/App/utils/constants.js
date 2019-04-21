@@ -43,3 +43,5 @@ export const nameToIndex = {
     farm: 0,
   },
 }
+
+export const TICK_DURATION = 200

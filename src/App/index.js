@@ -1,7 +1,7 @@
 import { connect } from './utils/storeContext'
 import AppView from './AppView'
 
-const mapStateToProps = ({ buildings, resources }) => ({
+const mapStateToProps = ({ resources }) => ({
   resources,
 })
 
