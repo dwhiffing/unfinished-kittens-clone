@@ -5,6 +5,12 @@ export default {
       name: 'food',
       value: 0,
       max: 5000,
+      visible: true,
+    },
+    {
+      name: 'wood',
+      value: 0,
+      max: 100,
     },
   ],
   buildings: [
@@ -24,15 +30,6 @@ export default {
       },
     },
   ],
-}
-
-export const nameToIndex = {
-  resources: {
-    food: 0,
-  },
-  buildings: {
-    farm: 0,
-  },
 }
 
 export const TICK_DURATION = 200

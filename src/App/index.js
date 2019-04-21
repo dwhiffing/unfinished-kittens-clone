@@ -12,6 +12,7 @@ const mapDispatchToProps = dispatch => ({
   load: () => dispatch({ type: 'LOAD' }),
   tick: () => dispatch({ type: 'TICK' }),
   gatherFood: () => dispatch({ type: 'GATHER_FOOD' }),
+  refineFood: () => dispatch({ type: 'REFINE_FOOD' }),
 })
 
 export default connect(

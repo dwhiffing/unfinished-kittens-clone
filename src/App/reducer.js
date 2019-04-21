@@ -1,5 +1,5 @@
 import u from 'updeep'
-import data, { nameToIndex } from './utils/constants'
+import data from './utils/constants'
 
 export const initialState = {
   loading: true,
@@ -38,6 +38,10 @@ const reducer = (state, action) => {
     return u(updateResources({ food: 1 }), state)
   }
 
+  if (action.type === 'REFINE_FOOD') {
+    return u(updateResources({ food: -10, wood: 1 }), state)
+  }
+
   if (action.type === 'BUY_BUILDING') {
     const { name, value, cost } = action.payload
     return u(
@@ -58,7 +62,7 @@ const updateSlice = (key, updates) => {
 
   Object.keys(updates).forEach(resourceName => {
     const amount = updates[resourceName]
-    const index = nameToIndex[key][resourceName]
+    const index = data[key].findIndex(({ name }) => name === resourceName)
     updateToPush[key][index] = resource => {
       let newValue = resource.value + amount
 
@@ -67,8 +71,14 @@ const updateSlice = (key, updates) => {
         newValue = resource.max
       }
 
+      // Enforce max if present
+      if (newValue < 0) {
+        newValue = 0
+      }
+
       return {
         ...resource,
+        visible: true,
         value: newValue,
       }
     }

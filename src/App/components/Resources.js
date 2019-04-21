@@ -10,14 +10,16 @@ const Resource = ({ name, value, max }) => (
 
 const Resources = ({ resources }) => (
   <div className="flex flex-column">
-    {resources.map(resource => (
-      <Resource
-        key={`resource-${resource.name}`}
-        name={resource.name}
-        value={resource.value}
-        max={resource.max}
-      />
-    ))}
+    {resources
+      .filter(resource => resource.visible)
+      .map(resource => (
+        <Resource
+          key={`resource-${resource.name}`}
+          name={resource.name}
+          value={resource.value}
+          max={resource.max}
+        />
+      ))}
   </div>
 )
 

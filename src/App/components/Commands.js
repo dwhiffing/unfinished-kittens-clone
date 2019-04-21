@@ -1,15 +1,18 @@
 import React from 'react'
 
-const Command = ({ name, onClick }) => (
-  <div onClick={onClick}>
-    <p>{name}</p>
+const Command = ({ name, onClick, canAfford = true }) => (
+  <div onClick={canAfford ? onClick : null}>
+    <p style={{ color: canAfford ? 'white' : 'red', cursor: 'pointer' }}>
+      {name}
+    </p>
   </div>
 )
 
-const Commands = ({ gatherFood, reset }) => (
+const Commands = ({ gatherFood, refineFood, reset }) => (
   <div className="flex flex-column">
-    <Command name="Gather food" onClick={gatherFood} />
-    <Command name="Reset" onClick={reset} />
+    <Command name="Gather food" {...gatherFood} />
+    <Command name="Refine food" {...refineFood} />
+    <Command name="Reset" {...reset} />
   </div>
 )
 
