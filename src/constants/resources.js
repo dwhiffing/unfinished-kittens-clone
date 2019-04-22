@@ -26,6 +26,15 @@ const hydratedData = data.map(obj => ({
   isUnlocked() {
     return this.value > 0
   },
+  getMax(buildings) {
+    const extra = buildings.reduce((prev, curr) => {
+      const effect = curr.effects.find(
+        e => e.type === 'maxResource' && e.payload.name === this.name
+      )
+      return effect ? effect.payload.amount + prev : prev
+    }, 0)
+    return this.max + extra
+  },
 }))
 
 export default hydratedData

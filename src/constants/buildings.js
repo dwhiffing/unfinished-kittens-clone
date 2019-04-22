@@ -12,7 +12,10 @@ const data = [
     name: 'house',
     value: 0,
     prices: { wood: 5 },
-    effects: [{ type: 'housing', payload: { amount: 2 } }],
+    effects: [
+      { type: 'maxResource', payload: { name: 'folks', amount: 2 } },
+      { type: 'resourcePerTick', payload: { name: 'folks', amount: 0.0125 } },
+    ],
   },
 ]
 

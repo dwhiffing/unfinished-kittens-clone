@@ -1,12 +1,15 @@
 export const getResourcesGainedPerTick = (buildings, jobs) => {
   const obj = {}
   buildings.forEach((building, index) => {
-    const {
-      payload: { name, amount },
-    } = buildings[index].effects.find(
+    const resourceEffect = buildings[index].effects.find(
       effect => effect.type === 'resourcePerTick'
     )
-    obj[name] = amount * buildings[index].value
+    if (resourceEffect) {
+      const {
+        payload: { name, amount },
+      } = resourceEffect
+      obj[name] = amount * buildings[index].value
+    }
   })
   jobs.forEach((job, index) => {
     const {
@@ -16,3 +19,12 @@ export const getResourcesGainedPerTick = (buildings, jobs) => {
   })
   return obj
 }
+
+export const getTotalWorkers = resources =>
+  parseInt(resources.find(({ name }) => name === 'folks').value)
+
+export const getNumWorkers = jobs =>
+  jobs.reduce((prev, curr) => prev + curr.value, 0)
+
+export const getAvailableWorkers = ({ jobs, resources }) =>
+  getTotalWorkers(resources) - getNumWorkers(jobs)

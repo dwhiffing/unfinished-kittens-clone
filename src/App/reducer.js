@@ -48,12 +48,10 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
+    const perTick = getResourcesGainedPerTick(state.buildings, state.jobs)
     return u(
       {
-        ...updateResources(
-          getResourcesGainedPerTick(state.buildings, state.jobs)
-        ),
-
+        ...updateResources(perTick, state),
         ...updateUnlocks(state),
       },
       state
@@ -61,20 +59,20 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'UPDATE_RESOURCES') {
-    return u(updateResources(action.payload), state)
+    return u(updateResources(action.payload, state), state)
   }
 
   if (action.type === 'UPDATE_JOBS') {
     const { name, value } = action.payload
-    return u({ ...updateJobs({ [name]: value }) }, state)
+    return u({ ...updateJobs({ [name]: value }, state) }, state)
   }
 
   if (action.type === 'BUY_BUILDING') {
     const { name, value, cost } = action.payload
     return u(
       {
-        ...updateBuildings({ [name]: value }),
-        ...updateResources(cost, { negated: true }),
+        ...updateBuildings({ [name]: value }, state),
+        ...updateResources(cost, state, { negated: true }),
       },
       state
     )
@@ -96,7 +94,7 @@ const updateUnlocks = state => {
   return { unlocks }
 }
 
-const updateSlice = (key, updates, { negated } = {}) => {
+const updateSlice = (key, updates, state, { negated } = {}) => {
   const updateToPush = { [key]: {} }
 
   Object.keys(updates).forEach(resourceName => {
@@ -104,13 +102,15 @@ const updateSlice = (key, updates, { negated } = {}) => {
     const index = data[key].findIndex(({ name }) => name === resourceName)
     updateToPush[key][index] = resource => {
       let newValue = resource.value + (negated ? -amount : amount)
-
       // Enforce max if present
-      if (typeof resource.max !== 'undefined' && newValue > resource.max) {
-        newValue = resource.max
+      if (resource.getMax) {
+        const max = resource.getMax(state.buildings)
+        if (newValue > max) {
+          newValue = max
+        }
       }
 
-      // Enforce max if present
+      // Enforce min if present
       if (newValue < 0) {
         newValue = 0
       }
@@ -124,8 +124,6 @@ const updateSlice = (key, updates, { negated } = {}) => {
   return updateToPush
 }
 
-const updateBuildings = (updates, options) =>
-  updateSlice('buildings', updates, options)
-const updateResources = (updates, options) =>
-  updateSlice('resources', updates, options)
-const updateJobs = (updates, options) => updateSlice('jobs', updates, options)
+const updateBuildings = (...args) => updateSlice('buildings', ...args)
+const updateResources = (...args) => updateSlice('resources', ...args)
+const updateJobs = (...args) => updateSlice('jobs', ...args)

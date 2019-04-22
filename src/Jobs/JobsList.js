@@ -8,7 +8,7 @@ const Job = ({ name, value, updateJobs, canAfford }) => (
     <div className="flex">
       <div
         className="button small"
-        onClick={() => updateJobs(1)}
+        onClick={() => canAfford && updateJobs(1)}
         style={{ marginRight: 10 }}>
         <span>+</span>
       </div>
@@ -19,19 +19,25 @@ const Job = ({ name, value, updateJobs, canAfford }) => (
   </div>
 )
 
-const JobsList = ({ jobs, updateJobs }) =>
-  jobs.map(job => (
-    <Job
-      key={job.name}
-      {...job}
-      canAfford={true}
-      updateJobs={value =>
-        updateJobs({
-          name: job.name,
-          value,
-        })
-      }
-    />
-  ))
+const JobsList = ({ jobs, updateJobs, availableWorkers, totalWorkers }) => (
+  <>
+    <p>
+      Available workers: {availableWorkers}/{totalWorkers}
+    </p>
+    {jobs.map(job => (
+      <Job
+        key={job.name}
+        {...job}
+        canAfford={availableWorkers > 0}
+        updateJobs={value =>
+          updateJobs({
+            name: job.name,
+            value,
+          })
+        }
+      />
+    ))}
+  </>
+)
 
 export default JobsList

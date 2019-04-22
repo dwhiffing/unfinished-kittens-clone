@@ -11,6 +11,7 @@ const Resources = ({ buildings, jobs, resources }) => {
           <Resource
             key={`resource-${resource.name}`}
             {...resource}
+            max={resource.getMax(buildings)}
             perSecond={(perTick[resource.name] * 5).toFixed(2)}
           />
         ))}

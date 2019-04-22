@@ -18,6 +18,7 @@ const AppView = ({
   buildings,
   jobs,
   commands,
+  unlocks,
 }) => {
   if (loading) {
     load()
@@ -36,7 +37,7 @@ const AppView = ({
     <Router>
       <div className="flex flex-row height-100">
         <div className="flex flex-column" style={{ flex: 1, padding: 10 }}>
-          <Links />
+          <Links showJobs={unlocks.includes('folks')} />
           <Commands
             commands={commands}
             resources={resources}
