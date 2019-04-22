@@ -6,18 +6,16 @@ import Links from './components/Links'
 import Commands from './components/Commands'
 import Resources from './components/Resources'
 import { TICK_DURATION } from './utils/constants'
-import { canAfford } from './utils'
 
 const AppView = ({
   save,
   load,
   tick,
-  reset,
-  gatherFood,
-  refineFood,
+  triggerCommand,
   loading,
   resources,
   buildings,
+  commands,
 }) => {
   if (loading) {
     load()
@@ -38,12 +36,9 @@ const AppView = ({
         <div className="flex flex-column" style={{ flex: 1 }}>
           <Links />
           <Commands
-            gatherFood={{ onClick: gatherFood }}
-            refineFood={{
-              onClick: refineFood,
-              canAfford: canAfford({ food: 100 }, resources),
-            }}
-            reset={{ onClick: reset }}
+            commands={commands}
+            resources={resources}
+            triggerCommand={triggerCommand}
           />
           <Resources resources={resources} buildings={buildings} />
         </div>

@@ -18,16 +18,30 @@ export default {
       // label, description, unlockRatio, unlockable, priceRatio, flavor
       name: 'farm',
       value: 0,
-      prices: [
+      prices: {
+        food: 10,
+      },
+      effects: [
+        { name: 'resourcePerTick', payload: { name: 'food', amount: 0.125 } },
+      ],
+    },
+  ],
+  commands: [
+    {
+      name: 'Gather food',
+      prices: { food: -1 },
+    },
+    {
+      name: 'Refine food',
+      prices: { wood: -1, food: 100 },
+    },
+    {
+      name: 'Reset',
+      effects: [
         {
-          name: 'food',
-          amount: 10,
-          ratio: 1.12,
+          type: 'RESET_SAVE',
         },
       ],
-      effects: {
-        resourcePerTick: { name: 'food', amount: 0.125 },
-      },
     },
   ],
 }

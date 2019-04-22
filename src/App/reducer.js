@@ -13,7 +13,7 @@ const reducer = (state, action) => {
     return state
   }
 
-  if (action.type === 'RESET') {
+  if (action.type === 'RESET_SAVE') {
     const shouldReset = window.confirm('sure?')
     if (shouldReset) {
       localStorage.removeItem('save')
@@ -32,12 +32,10 @@ const reducer = (state, action) => {
     return u(updateResources(getPerTick(state.buildings)), state)
   }
 
-  if (action.type === 'GATHER_FOOD') {
-    return u(updateResources({ food: 1 }), state)
-  }
+  console.log(action)
 
-  if (action.type === 'REFINE_FOOD') {
-    return u(updateResources({ food: -10, wood: 1 }), state)
+  if (action.type === 'UPDATE_RESOURCES') {
+    return u(updateResources(action.payload), state)
   }
 
   if (action.type === 'BUY_BUILDING') {

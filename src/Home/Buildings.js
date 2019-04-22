@@ -3,9 +3,10 @@ import React from 'react'
 const getNextCost = (building, { negated = false } = {}) => {
   const obj = {}
 
-  building.prices.forEach(price => {
-    const amount = price.amount * Math.pow(price.ratio, building.value)
-    obj[price.name] = negated ? -amount : amount
+  Object.keys(building.prices).forEach(priceKey => {
+    const price = building.prices[priceKey]
+    const amount = price * Math.pow(1.12, building.value)
+    obj[priceKey] = negated ? -amount : amount
   })
 
   return obj
