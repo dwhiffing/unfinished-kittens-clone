@@ -17,6 +17,7 @@ const AppView = ({
   refineFood,
   loading,
   resources,
+  buildings,
 }) => {
   if (loading) {
     load()
@@ -44,7 +45,7 @@ const AppView = ({
             }}
             reset={{ onClick: reset }}
           />
-          <Resources resources={resources} />
+          <Resources resources={resources} buildings={buildings} />
         </div>
         <div style={{ flex: 2 }}>
           <div>

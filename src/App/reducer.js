@@ -1,5 +1,6 @@
 import u from 'updeep'
 import data from './utils/constants'
+import { getPerTick } from './utils'
 
 export const initialState = {
   loading: true,
@@ -28,10 +29,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    const foodPerTick =
-      state.buildings[0].effects.foodPerTick * state.buildings[0].value
-
-    return u(updateResources({ food: foodPerTick }), state)
+    return u(updateResources(getPerTick(state.buildings)), state)
   }
 
   if (action.type === 'GATHER_FOOD') {

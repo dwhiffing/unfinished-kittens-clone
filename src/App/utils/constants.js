@@ -26,7 +26,7 @@ export default {
         },
       ],
       effects: {
-        foodPerTick: 0.125,
+        resourcePerTick: { name: 'food', amount: 0.125 },
       },
     },
   ],
