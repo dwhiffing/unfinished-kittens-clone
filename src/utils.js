@@ -29,5 +29,3 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
   })
   return updateToPush
 }
-
-export 
