@@ -1,5 +1,44 @@
 import React, { createContext, useReducer } from 'react'
-import reducer, { initialState } from './App/reducer'
+import data from './constants'
+import resourcesReducer from './Resources/reducer'
+import buildingsReducer from './Buildings/reducer'
+import commandsReducer from './Commands/reducer'
+import jobsReducer from './Jobs/reducer'
+import appReducer from './App/reducer'
+
+export const INITIAL_MODELS = {
+  resources: [],
+  buildings: [],
+  commands: [],
+  jobs: [],
+}
+
+export const initialState = {
+  app: { loading: true, unlocks: [] },
+  ...INITIAL_MODELS,
+  ...data,
+}
+
+const combineReducers = (reducers, initialState = {}) => {
+  return (state = initialState, action) => {
+    const nextReducers = {}
+    Object.entries(reducers).forEach(([key, reducer]) => {
+      nextReducers[key] = reducer(state, action)
+    })
+    return nextReducers
+  }
+}
+
+const reducer = combineReducers(
+  {
+    resources: resourcesReducer,
+    commands: commandsReducer,
+    buildings: buildingsReducer,
+    jobs: jobsReducer,
+    app: appReducer,
+  },
+  initialState
+)
 
 const StoreContext = createContext(initialState)
 

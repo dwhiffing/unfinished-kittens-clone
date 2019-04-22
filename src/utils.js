@@ -30,12 +30,4 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
   return updateToPush
 }
 
-export const combineReducers = reducers => {
-  return (state = {}, action) => {
-    const nextReducers = {}
-    Object.entries(reducers).forEach(([key, reducer]) => {
-      nextReducers[key] = reducer(state, action)
-    })
-    return nextReducers
-  }
-}
+export 

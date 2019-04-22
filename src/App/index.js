@@ -1,6 +1,6 @@
 import { connect } from '../storeContext'
 import AppView from './AppView'
-import { INITIAL_MODELS } from './reducer'
+import { INITIAL_MODELS } from '../storeContext'
 
 const mapStateToProps = state => {
   return { state }

@@ -6,7 +6,7 @@ import Jobs from '../Jobs'
 import Commands from '../Commands'
 import Resources from '../Resources'
 import Links from './Links'
-import { TICK_DURATION } from './constants'
+import { TICK_DURATION } from '../constants'
 
 const AppView = ({ save, load, tick, triggerCommand, state }) => {
   if (state.app.loading) {
