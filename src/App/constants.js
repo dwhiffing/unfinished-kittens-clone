@@ -8,7 +8,6 @@ const data = {
   buildings,
   commands,
   jobs,
-  unlocks: [],
 }
 
 export default data

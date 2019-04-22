@@ -11,7 +11,9 @@ const mapDispatchToProps = dispatch => ({
   tick: () => dispatch({ type: 'TICK' }),
   load: () => {
     const saveString = localStorage.getItem('save')
-    const save = saveString ? JSON.parse(saveString) : { ...INITIAL_MODELS }
+    const save = saveString
+      ? JSON.parse(saveString)
+      : { ...INITIAL_MODELS, app: { loading: true, unlocks: [] } }
 
     dispatch({
       type: 'LOAD',

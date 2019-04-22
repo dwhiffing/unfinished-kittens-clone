@@ -11,37 +11,33 @@ export const INITIAL_MODELS = {
   buildings: [],
   commands: [],
   jobs: [],
-  unlocks: [],
 }
 
 export const initialState = {
-  app: { loading: true },
+  app: { loading: true, unlocks: [] },
   ...INITIAL_MODELS,
   ...data,
 }
 
 const appReducer = (state, action) => {
   if (action.type === 'SAVE') {
-    let obj = { ...INITIAL_MODELS }
+    let obj = { ...INITIAL_MODELS, app: { unlocks: [] } }
     obj.resources = state.resources.map(({ name, value }) => [name, value])
     obj.buildings = state.buildings.map(({ name, value }) => [name, value])
     obj.jobs = state.jobs.map(({ name, value }) => [name, value])
-    obj.unlocks = state.unlocks
+    obj.app.unlocks = state.app.unlocks
     localStorage.setItem('save', JSON.stringify(obj))
   }
-  if (action.type === 'LOAD') {
-    return u({ loading: false }, state.app)
-  }
-  return state.app
-}
 
-const unlockReducer = (state, action) => {
   if (action.type === 'LOAD') {
-    return [...action.payload.unlocks]
+    return u(
+      { loading: false, unlocks: [...action.payload.app.unlocks] },
+      state.app
+    )
   }
 
   if (action.type === 'TICK') {
-    const unlocks = [...state.unlocks]
+    const unlocks = [...state.app.unlocks]
     const unlockables = state.resources.concat(state.buildings)
     const remaining = unlockables.filter(u => !unlocks.includes(u.name))
     remaining.forEach(unlockable => {
@@ -49,10 +45,10 @@ const unlockReducer = (state, action) => {
         unlocks.push(unlockable.name)
       }
     })
-    return unlocks
+    return u({ unlocks }, state.app)
   }
 
-  return state.unlocks
+  return state.app
 }
 
 const reducer = combineReducers({
@@ -61,7 +57,6 @@ const reducer = combineReducers({
   buildings: buildingsReducer,
   jobs: jobsReducer,
   app: appReducer,
-  unlocks: unlockReducer,
 })
 
 export default reducer

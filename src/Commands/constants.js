@@ -5,10 +5,15 @@ const data = [
     effects: [{ type: 'updateResources', payload: { food: 1 } }],
   },
   {
-    name: '50 food -> 1 wood',
+    name: 'Gather 100 food (CHEAT)',
+    color: '#e6cc3b',
+    effects: [{ type: 'updateResources', payload: { food: 100 } }],
+  },
+  {
+    name: '100 food -> 1 wood',
     color: '#b7612c',
     effects: [
-      { type: 'updateResources', payload: { food: -50 } },
+      { type: 'updateResources', payload: { food: -100 } },
       { type: 'updateResources', payload: { wood: 1 } },
     ],
   },
