@@ -9,7 +9,7 @@ export const canAfford = (prices = {}, resources) => {
   return canAfford
 }
 
-export const getPerTick = buildings => {
+export const getResourcesGainedPerTick = buildings => {
   const obj = {}
   buildings.forEach((building, index) => {
     const {

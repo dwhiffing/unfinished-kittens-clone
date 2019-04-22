@@ -5,11 +5,13 @@ export default {
       name: 'food',
       value: 0,
       max: 5000,
+      color: '#e6cc3b',
       visible: true,
     },
     {
       name: 'wood',
       value: 0,
+      color: '#b7612c',
       max: 100,
     },
   ],
@@ -31,7 +33,7 @@ export default {
     },
     {
       name: 'Refine food',
-      prices: { food: 100 },
+      prices: { food: 50 },
       effects: [{ type: 'UPDATE_RESOURCES', payload: { wood: 1 } }],
     },
     {

@@ -1,6 +1,6 @@
 import u from 'updeep'
 import data from './utils/constants'
-import { getPerTick } from './utils'
+import { getResourcesGainedPerTick } from './utils'
 
 export const initialState = {
   loading: true,
@@ -9,7 +9,10 @@ export const initialState = {
 
 const reducer = (state, action) => {
   if (action.type === 'SAVE') {
-    localStorage.setItem('save', JSON.stringify(state))
+    let obj = { resources: [], buildings: [] }
+    obj.resources = state.resources.map(({ name, value }) => [name, value])
+    obj.buildings = state.buildings.map(({ name, value }) => [name, value])
+    localStorage.setItem('save', JSON.stringify(obj))
     return state
   }
 
@@ -24,15 +27,24 @@ const reducer = (state, action) => {
 
   if (action.type === 'LOAD') {
     const saveString = localStorage.getItem('save')
-    const save = saveString ? JSON.parse(saveString) : data
-    return u({ ...save, loading: false }, state)
+    const save = saveString
+      ? JSON.parse(saveString)
+      : { resources: [], buildings: [] }
+
+    const update = { ...data, loading: false }
+    save.resources.forEach((resource, index) => {
+      update.resources[index].value = resource[1]
+    })
+    save.buildings.forEach((resource, index) => {
+      update.buildings[index].value = resource[1]
+    })
+    console.log(save, update)
+    return u(update, state)
   }
 
   if (action.type === 'TICK') {
-    return u(updateResources(getPerTick(state.buildings)), state)
+    return u(updateResources(getResourcesGainedPerTick(state.buildings)), state)
   }
-
-  console.log(action)
 
   if (action.type === 'UPDATE_RESOURCES') {
     return u(updateResources(action.payload), state)

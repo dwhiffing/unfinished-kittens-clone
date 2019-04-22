@@ -9,13 +9,13 @@ const Command = ({ name, onClick, canAfford = true }) => (
   </div>
 )
 
-const Commands = ({ commands, triggerCommand, resources }) => (
+const Commands = ({ commands, onClick, resources }) => (
   <div className="flex flex-column">
     {commands.map(command => (
       <Command
         key={`command-${command.name}`}
         name={command.name}
-        onClick={() => triggerCommand(command)}
+        onClick={() => onClick(command)}
         canAfford={canAfford(command.prices, resources)}
       />
     ))}

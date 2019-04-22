@@ -38,7 +38,7 @@ const AppView = ({
           <Commands
             commands={commands}
             resources={resources}
-            triggerCommand={triggerCommand}
+            onClick={triggerCommand}
           />
           <Resources resources={resources} buildings={buildings} />
         </div>
