@@ -1,11 +1,9 @@
 import React from 'react'
-import { canAfford } from '../utils'
+import { getCanAfford } from '../utils'
 
-const Command = ({ name, onClick, canAfford = true }) => (
-  <div onClick={canAfford ? onClick : null}>
-    <p style={{ color: canAfford ? 'white' : 'red', cursor: 'pointer' }}>
-      {name}
-    </p>
+const Command = ({ name, onClick, color = 'white', canAfford = true }) => (
+  <div onClick={canAfford ? onClick : null} className="button command">
+    <p style={{ color: canAfford ? color : 'red' }}>{name}</p>
   </div>
 )
 
@@ -15,8 +13,9 @@ const Commands = ({ commands, onClick, resources }) => (
       <Command
         key={`command-${command.name}`}
         name={command.name}
+        color={command.color}
         onClick={() => onClick(command)}
-        canAfford={canAfford(command.prices, resources)}
+        canAfford={getCanAfford(command.prices, resources)}
       />
     ))}
   </div>

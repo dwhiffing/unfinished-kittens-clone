@@ -33,7 +33,7 @@ const AppView = ({
   return (
     <Router>
       <div className="flex flex-row height-100">
-        <div className="flex flex-column" style={{ flex: 1 }}>
+        <div className="flex flex-column" style={{ flex: 1, padding: 10 }}>
           <Links />
           <Commands
             commands={commands}
@@ -42,7 +42,7 @@ const AppView = ({
           />
           <Resources resources={resources} buildings={buildings} />
         </div>
-        <div style={{ flex: 2 }}>
+        <div style={{ flex: 2, padding: 10 }}>
           <div>
             <Route exact path="/" component={Home} />
           </div>

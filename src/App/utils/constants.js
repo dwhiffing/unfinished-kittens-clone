@@ -29,11 +29,13 @@ export default {
   commands: [
     {
       name: 'Gather food',
+      color: '#e6cc3b',
       effects: [{ type: 'UPDATE_RESOURCES', payload: { food: 1 } }],
     },
     {
-      name: 'Refine food',
+      name: '50 food -> 1 wood',
       prices: { food: 50 },
+      color: '#b7612c',
       effects: [{ type: 'UPDATE_RESOURCES', payload: { wood: 1 } }],
     },
     {

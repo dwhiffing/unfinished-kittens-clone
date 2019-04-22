@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCanAfford } from '../App/utils'
 
 const getNextCost = (building, { negated = false } = {}) => {
   const obj = {}
@@ -12,23 +13,31 @@ const getNextCost = (building, { negated = false } = {}) => {
   return obj
 }
 
-const Slat = ({ label, onClick, color = 'white' }) => (
-  <div onClick={onClick}>
-    <p style={{ color }}>{label}</p>
+const Building = ({ name, value, onClick, canAfford, prices }) => (
+  <div className="button building" onClick={onClick}>
+    <p style={{ color: canAfford ? 'white' : 'red' }}>
+      {name} ({value})
+    </p>
+    {Object.keys(prices).map(resourceName => (
+      <p
+        key={`key-${resourceName}`}
+        style={{ color: canAfford ? 'white' : 'red' }}>
+        {resourceName}: {prices[resourceName].toFixed(2)}
+      </p>
+    ))}
   </div>
 )
 
 const Buildings = ({ resources, buildings, buyBuilding }) =>
   buildings.map(building => {
-    const foodCost = getNextCost(building).food
-    const canAfford = resources[0].value >= foodCost
+    const prices = getNextCost(building)
+    const canAfford = getCanAfford(prices, resources)
     return (
-      <Slat
+      <Building
         key={building.name}
-        color={canAfford ? 'white' : 'red'}
-        label={`${building.name} - ${building.value} cost: ${foodCost.toFixed(
-          2
-        )}`}
+        {...building}
+        prices={prices}
+        canAfford={canAfford}
         onClick={() =>
           canAfford &&
           buyBuilding({
