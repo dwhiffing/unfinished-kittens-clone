@@ -15,22 +15,24 @@ const Building = ({ name, value, onClick, canAfford, prices }) => (
   </div>
 )
 
-const Buildings = ({ resources, buildings, buyBuilding }) =>
-  buildings.map(building => (
-    <Building
-      key={building.name}
-      {...building}
-      prices={building.getNextCost()}
-      canAfford={building.getCanAfford(resources)}
-      onClick={() =>
-        building.getCanAfford(resources) &&
-        buyBuilding({
-          name: building.name,
-          value: 1,
-          cost: building.getNextCost(),
-        })
-      }
-    />
-  ))
+const Buildings = ({ unlocks, resources, buildings, buyBuilding }) =>
+  buildings
+    .filter(building => unlocks.includes(building.name))
+    .map(building => (
+      <Building
+        key={building.name}
+        {...building}
+        prices={building.getNextCost()}
+        canAfford={building.getCanAfford(resources)}
+        onClick={() =>
+          building.getCanAfford(resources) &&
+          buyBuilding({
+            name: building.name,
+            value: 1,
+            cost: building.getNextCost(),
+          })
+        }
+      />
+    ))
 
 export default Buildings

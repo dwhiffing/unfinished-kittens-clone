@@ -8,6 +8,7 @@ export default {
   buildings,
   commands,
   jobs,
+  unlocks: [],
 }
 
 export const TICK_DURATION = 200

@@ -1,10 +1,11 @@
 import React from 'react'
 import Buildings from './Buildings'
 
-const HomeView = ({ buildings, resources, buyBuilding }) => (
+const HomeView = ({ unlocks, buildings, resources, buyBuilding }) => (
   <Buildings
     resources={resources}
     buildings={buildings}
+    unlocks={unlocks}
     buyBuilding={buyBuilding}
   />
 )

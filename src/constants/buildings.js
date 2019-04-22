@@ -8,10 +8,22 @@ const data = [
       { type: 'resourcePerTick', payload: { name: 'food', amount: 0.125 } },
     ],
   },
+  {
+    name: 'house',
+    value: 0,
+    prices: { wood: 5 },
+    effects: [{ type: 'housing', payload: { amount: 2 } }],
+  },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
+  isUnlocked(resources) {
+    return Object.entries(this.prices).every(([resourceName, price]) => {
+      const currentResource = resources.find(r => r.name === resourceName).value
+      return currentResource > price / 2
+    })
+  },
   getNextCost() {
     const obj = {}
 

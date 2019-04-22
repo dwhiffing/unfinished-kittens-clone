@@ -12,6 +12,8 @@ const reducer = (state, action) => {
     let obj = { resources: [], buildings: [] }
     obj.resources = state.resources.map(({ name, value }) => [name, value])
     obj.buildings = state.buildings.map(({ name, value }) => [name, value])
+    obj.jobs = state.jobs.map(({ name, value }) => [name, value])
+    obj.unlocks = state.unlocks
     localStorage.setItem('save', JSON.stringify(obj))
     return state
   }
@@ -20,6 +22,7 @@ const reducer = (state, action) => {
     const shouldReset = window.confirm('sure?')
     if (shouldReset) {
       localStorage.removeItem('save')
+      localStorage.removeItem('unlocks')
       document.location.reload()
     }
     return state
@@ -27,23 +30,32 @@ const reducer = (state, action) => {
 
   if (action.type === 'LOAD') {
     const saveString = localStorage.getItem('save')
-    const save = saveString
-      ? JSON.parse(saveString)
-      : { resources: [], buildings: [] }
+    const save = saveString ? JSON.parse(saveString) : {}
+    const { resources = [], buildings = [], jobs = [], unlocks = [] } = save
 
     const update = { ...data, loading: false }
-    save.resources.forEach((resource, index) => {
+    resources.forEach((resource, index) => {
       update.resources[index].value = resource[1]
     })
-    save.buildings.forEach((resource, index) => {
+    buildings.forEach((resource, index) => {
       update.buildings[index].value = resource[1]
     })
+    jobs.forEach((resource, index) => {
+      update.jobs[index].value = resource[1]
+    })
+    update.unlocks = unlocks
     return u(update, state)
   }
 
   if (action.type === 'TICK') {
     return u(
-      updateResources(getResourcesGainedPerTick(state.buildings, state.jobs)),
+      {
+        ...updateResources(
+          getResourcesGainedPerTick(state.buildings, state.jobs)
+        ),
+
+        ...updateUnlocks(state),
+      },
       state
     )
   }
@@ -71,6 +83,18 @@ const reducer = (state, action) => {
 }
 
 export default reducer
+
+const updateUnlocks = state => {
+  const unlocks = [...state.unlocks]
+  const unlockables = state.resources.concat(state.buildings)
+  const remaining = unlockables.filter(u => !unlocks.includes(u.name))
+  remaining.forEach(unlockable => {
+    if (unlockable.isUnlocked(state.resources)) {
+      unlocks.push(unlockable.name)
+    }
+  })
+  return { unlocks }
+}
 
 const updateSlice = (key, updates, { negated } = {}) => {
   const updateToPush = { [key]: {} }

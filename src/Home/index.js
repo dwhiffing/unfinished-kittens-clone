@@ -1,8 +1,9 @@
 import { connect } from '../App/utils/storeContext'
 import HomeView from './HomeView'
 
-const mapStateToProps = ({ buildings, resources }) => ({
+const mapStateToProps = ({ unlocks, buildings, resources }) => ({
   buildings,
+  unlocks,
   resources,
 })
 
