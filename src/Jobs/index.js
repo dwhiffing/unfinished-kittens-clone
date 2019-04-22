@@ -1,6 +1,6 @@
-import { connect } from '../App/utils/storeContext'
+import { connect } from '../storeContext'
 import JobsView from './JobsView'
-import { getAvailableWorkers, getTotalWorkers } from '../App/utils'
+import { getAvailableWorkers, getTotalWorkers } from './utils'
 
 const mapStateToProps = ({ jobs, resources }) => ({
   jobs,

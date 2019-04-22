@@ -3,11 +3,11 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
 import Jobs from '../Jobs'
-import Commands from '../Commands/CommandsList'
-import Resources from '../Resources/ResourcesList'
-import { Link } from 'react-router-dom'
+import Commands from '../Commands'
+import Resources from '../Resources'
+import Links from './Links'
+import { TICK_DURATION } from './constants'
 
-import { TICK_DURATION } from '../constants'
 const AppView = ({ save, load, tick, triggerCommand, state }) => {
   if (state.app.loading) {
     load()
@@ -26,20 +26,9 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
     <Router>
       <div className="flex flex-row height-100">
         <div className="flex flex-column" style={{ flex: 1, padding: 10 }}>
-          <div className="flex flex-column">
-            <Link to="/">Bonfire</Link>
-            {state.unlocks.includes('folks') && <Link to="/jobs">Village</Link>}
-          </div>
-          <Commands
-            commands={state.commands}
-            resources={state.resources}
-            onClick={triggerCommand}
-          />
-          <Resources
-            resources={state.resources}
-            buildings={state.buildings}
-            jobs={state.jobs}
-          />
+          <Links />
+          <Commands />
+          <Resources />
         </div>
         <div style={{ flex: 2, padding: 10 }}>
           <div>

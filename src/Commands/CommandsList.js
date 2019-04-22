@@ -6,14 +6,14 @@ const Command = ({ name, onClick, color = 'white', canAfford = true }) => (
   </div>
 )
 
-const CommandsList = ({ commands, onClick, resources }) => (
+const CommandsList = ({ commands, triggerCommand, resources }) => (
   <div className="flex flex-column">
     {commands.map(command => (
       <Command
         key={`command-${command.name}`}
         name={command.name}
         color={command.color}
-        onClick={() => onClick(command)}
+        onClick={() => triggerCommand(command)}
         canAfford={command.getCanAfford(resources)}
       />
     ))}

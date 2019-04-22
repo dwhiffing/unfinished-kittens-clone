@@ -1,6 +1,6 @@
 import u from 'updeep'
-import data from '../constants'
-import { updateSlice } from '../reducer'
+import data from '../App/constants'
+import { updateSlice } from '../App/utils'
 
 const updateBuildings = (...args) => updateSlice('buildings', ...args)
 

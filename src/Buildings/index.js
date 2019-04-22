@@ -1,4 +1,4 @@
-import { connect } from '../App/utils/storeContext'
+import { connect } from '../storeContext'
 import BuildingsView from './BuildingsView'
 
 const mapStateToProps = ({ unlocks, buildings, resources }) => ({
