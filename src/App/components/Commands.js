@@ -1,5 +1,4 @@
 import React from 'react'
-import { getCanAfford } from '../utils'
 
 const Command = ({ name, onClick, color = 'white', canAfford = true }) => (
   <div onClick={canAfford ? onClick : null} className="button command">
@@ -15,7 +14,7 @@ const Commands = ({ commands, onClick, resources }) => (
         name={command.name}
         color={command.color}
         onClick={() => onClick(command)}
-        canAfford={getCanAfford(command.prices, resources)}
+        canAfford={command.getCanAfford(resources)}
       />
     ))}
   </div>

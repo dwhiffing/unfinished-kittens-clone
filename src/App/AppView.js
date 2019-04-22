@@ -5,8 +5,8 @@ import Home from '../Home'
 import Links from './components/Links'
 import Commands from './components/Commands'
 import Resources from './components/Resources'
-import { TICK_DURATION } from './utils/constants'
 
+import { TICK_DURATION } from '../constants'
 const AppView = ({
   save,
   load,

@@ -1,5 +1,5 @@
 import u from 'updeep'
-import data from './utils/constants'
+import data from '../constants'
 import { getResourcesGainedPerTick } from './utils'
 
 export const initialState = {
@@ -38,7 +38,6 @@ const reducer = (state, action) => {
     save.buildings.forEach((resource, index) => {
       update.buildings[index].value = resource[1]
     })
-    console.log(save, update)
     return u(update, state)
   }
 
@@ -55,7 +54,7 @@ const reducer = (state, action) => {
     return u(
       {
         ...updateBuildings({ [name]: value }),
-        ...updateResources(cost),
+        ...updateResources(cost, { negated: true }),
       },
       state
     )
@@ -65,14 +64,14 @@ const reducer = (state, action) => {
 
 export default reducer
 
-const updateSlice = (key, updates) => {
+const updateSlice = (key, updates, { negated } = {}) => {
   const updateToPush = { [key]: {} }
 
   Object.keys(updates).forEach(resourceName => {
     const amount = updates[resourceName]
     const index = data[key].findIndex(({ name }) => name === resourceName)
     updateToPush[key][index] = resource => {
-      let newValue = resource.value + amount
+      let newValue = resource.value + (negated ? -amount : amount)
 
       // Enforce max if present
       if (typeof resource.max !== 'undefined' && newValue > resource.max) {
@@ -94,5 +93,7 @@ const updateSlice = (key, updates) => {
   return updateToPush
 }
 
-const updateResources = updates => updateSlice('resources', updates)
-const updateBuildings = updates => updateSlice('buildings', updates)
+const updateBuildings = (updates, options) =>
+  updateSlice('buildings', updates, options)
+const updateResources = (updates, options) =>
+  updateSlice('resources', updates, options)

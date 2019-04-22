@@ -9,7 +9,6 @@ const mapStateToProps = ({ buildings, resources }) => ({
 const mapDispatchToProps = dispatch => ({
   buyBuilding: building =>
     dispatch({ type: 'BUY_BUILDING', payload: building }),
-  gatherFood: () => dispatch({ type: 'GATHER_FOOD' }),
 })
 
 export default connect(
