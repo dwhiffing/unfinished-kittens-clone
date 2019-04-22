@@ -2,7 +2,7 @@ const data = [
   {
     name: 'Gather food',
     color: '#e6cc3b',
-    effects: [{ type: 'UPDATE_RESOURCES', payload: { food: 1 } }],
+    effects: [{ type: 'UPDATE_RESOURCES', payload: { food: 10 } }],
   },
   {
     name: '50 food -> 1 wood',

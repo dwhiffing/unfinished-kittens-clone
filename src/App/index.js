@@ -1,11 +1,8 @@
 import { connect } from './utils/storeContext'
 import AppView from './AppView'
 
-const mapStateToProps = ({ loading, resources, buildings, commands }) => ({
-  loading,
-  resources,
-  buildings,
-  commands,
+const mapStateToProps = state => ({
+  ...state,
 })
 
 const mapDispatchToProps = dispatch => ({

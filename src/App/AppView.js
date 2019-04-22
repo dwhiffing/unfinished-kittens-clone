@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Home from '../Home'
+import Jobs from '../Jobs'
 import Links from './components/Links'
 import Commands from './components/Commands'
 import Resources from './components/Resources'
@@ -15,6 +16,7 @@ const AppView = ({
   loading,
   resources,
   buildings,
+  jobs,
   commands,
 }) => {
   if (loading) {
@@ -40,11 +42,12 @@ const AppView = ({
             resources={resources}
             onClick={triggerCommand}
           />
-          <Resources resources={resources} buildings={buildings} />
+          <Resources resources={resources} buildings={buildings} jobs={jobs} />
         </div>
         <div style={{ flex: 2, padding: 10 }}>
           <div>
             <Route exact path="/" component={Home} />
+            <Route exact path="/jobs" component={Jobs} />
           </div>
         </div>
       </div>

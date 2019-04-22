@@ -1,8 +1,8 @@
 import React from 'react'
 import { getResourcesGainedPerTick } from '../utils'
 
-const Resources = ({ buildings, resources }) => {
-  const perTick = getResourcesGainedPerTick(buildings)
+const Resources = ({ buildings, jobs, resources }) => {
+  const perTick = getResourcesGainedPerTick(buildings, jobs)
   return (
     <div className="flex flex-column">
       {resources

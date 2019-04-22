@@ -42,11 +42,19 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    return u(updateResources(getResourcesGainedPerTick(state.buildings)), state)
+    return u(
+      updateResources(getResourcesGainedPerTick(state.buildings, state.jobs)),
+      state
+    )
   }
 
   if (action.type === 'UPDATE_RESOURCES') {
     return u(updateResources(action.payload), state)
+  }
+
+  if (action.type === 'UPDATE_JOBS') {
+    const { name, value } = action.payload
+    return u({ ...updateJobs({ [name]: value }) }, state)
   }
 
   if (action.type === 'BUY_BUILDING') {
@@ -85,7 +93,6 @@ const updateSlice = (key, updates, { negated } = {}) => {
 
       return {
         ...resource,
-        visible: true,
         value: newValue,
       }
     }
@@ -97,3 +104,4 @@ const updateBuildings = (updates, options) =>
   updateSlice('buildings', updates, options)
 const updateResources = (updates, options) =>
   updateSlice('resources', updates, options)
+const updateJobs = (updates, options) => updateSlice('jobs', updates, options)
