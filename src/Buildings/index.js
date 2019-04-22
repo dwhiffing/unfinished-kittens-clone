@@ -1,5 +1,5 @@
 import { connect } from '../App/utils/storeContext'
-import HomeView from './HomeView'
+import BuildingsView from './BuildingsView'
 
 const mapStateToProps = ({ unlocks, buildings, resources }) => ({
   buildings,
@@ -15,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeView)
+)(BuildingsView)
