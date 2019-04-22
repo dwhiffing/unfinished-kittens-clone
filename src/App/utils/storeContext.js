@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react'
-import reducer, { initialState } from '../reducer'
+import reducer, { initialState } from '../../reducer'
 
 const StoreContext = createContext(initialState)
 

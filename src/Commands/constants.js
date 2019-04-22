@@ -2,21 +2,21 @@ const data = [
   {
     name: 'Gather food',
     color: '#e6cc3b',
-    effects: [{ type: 'UPDATE_RESOURCES', payload: { food: 10 } }],
+    effects: [{ type: 'updateResources', payload: { food: 1 } }],
   },
   {
     name: '50 food -> 1 wood',
     color: '#b7612c',
     effects: [
-      { type: 'UPDATE_RESOURCES', payload: { food: -50 } },
-      { type: 'UPDATE_RESOURCES', payload: { wood: 1 } },
+      { type: 'updateResources', payload: { food: -50 } },
+      { type: 'updateResources', payload: { wood: 1 } },
     ],
   },
   {
     name: 'Reset',
     effects: [
       {
-        type: 'RESET_SAVE',
+        type: 'resetSave',
       },
     ],
   },

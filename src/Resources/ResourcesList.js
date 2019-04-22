@@ -1,5 +1,5 @@
 import React from 'react'
-import { getResourcesGainedPerTick } from '../App/utils'
+import { getResourcesGainedPerTick } from './utils'
 
 const ResourcesList = ({ buildings, jobs, resources }) => {
   const perTick = getResourcesGainedPerTick(buildings, jobs)
