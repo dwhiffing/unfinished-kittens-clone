@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
 import Jobs from '../Jobs'
 import Links from './components/Links'
-import Commands from './components/Commands'
-import Resources from './components/Resources'
+import Commands from '../Commands/CommandsList'
+import Resources from '../Resources/ResourcesList'
 
 import { TICK_DURATION } from '../constants'
 const AppView = ({

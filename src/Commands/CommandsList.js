@@ -6,7 +6,7 @@ const Command = ({ name, onClick, color = 'white', canAfford = true }) => (
   </div>
 )
 
-const Commands = ({ commands, onClick, resources }) => (
+const CommandsList = ({ commands, onClick, resources }) => (
   <div className="flex flex-column">
     {commands.map(command => (
       <Command
@@ -20,4 +20,4 @@ const Commands = ({ commands, onClick, resources }) => (
   </div>
 )
 
-export default Commands
+export default CommandsList

@@ -19,6 +19,12 @@ const data = [
     color: 'purple',
     max: 0,
   },
+  {
+    name: 'science',
+    value: 0,
+    color: 'blue',
+    max: 100,
+  },
 ]
 
 const hydratedData = data.map(obj => ({
@@ -31,7 +37,7 @@ const hydratedData = data.map(obj => ({
       const effect = curr.effects.find(
         e => e.type === 'maxResource' && e.payload.name === this.name
       )
-      return effect ? effect.payload.amount + prev : prev
+      return effect ? effect.payload.amount * curr.value + prev : prev
     }, 0)
     return this.max + extra
   },

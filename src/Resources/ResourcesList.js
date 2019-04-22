@@ -1,7 +1,7 @@
 import React from 'react'
-import { getResourcesGainedPerTick } from '../utils'
+import { getResourcesGainedPerTick } from '../App/utils'
 
-const Resources = ({ buildings, jobs, resources }) => {
+const ResourcesList = ({ buildings, jobs, resources }) => {
   const perTick = getResourcesGainedPerTick(buildings, jobs)
   return (
     <div className="flex flex-column">
@@ -19,7 +19,7 @@ const Resources = ({ buildings, jobs, resources }) => {
   )
 }
 
-export default Resources
+export default ResourcesList
 
 const Resource = ({ name, value, max, color, perSecond }) => (
   <div className="flex flex-row" style={{ marginTop: 10 }}>
