@@ -15,7 +15,7 @@ export const getPerTick = buildings => {
     const {
       payload: { name, amount },
     } = buildings[index].effects.find(
-      effect => effect.name === 'resourcePerTick'
+      effect => effect.type === 'resourcePerTick'
     )
     obj[name] = amount * buildings[index].value
   })

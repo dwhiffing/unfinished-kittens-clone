@@ -21,13 +21,12 @@ const mapDispatchToProps = dispatch => ({
   save: () => dispatch({ type: 'SAVE' }),
   load: () => dispatch({ type: 'LOAD' }),
   tick: () => dispatch({ type: 'TICK' }),
-  triggerCommand: command => {
-    const effects = command.effects || []
+  triggerCommand: ({ effects = [], prices }) => {
     effects.forEach(effect => dispatch(effect))
-    command.prices &&
+    prices &&
       dispatch({
         type: 'UPDATE_RESOURCES',
-        payload: invertPrices(command.prices),
+        payload: invertPrices(prices),
       })
   },
 })
