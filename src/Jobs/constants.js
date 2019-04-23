@@ -27,12 +27,7 @@ const hydratedData = data.map(obj => ({
   summary() {
     return `${this.effects
       .filter(({ type }) => type === 'resourcePerTick')
-      .map(
-        ({ payload }) =>
-          `${payload.amount * 5} <span style="color:${this.color}">${
-            payload.name
-          }</span> /sec`
-      )}`
+      .map(({ payload }) => `${payload.amount * 5} ${payload.name} /sec`)}`
   },
   isUnlocked({ buildings, science }) {
     let isUnlocked = false
