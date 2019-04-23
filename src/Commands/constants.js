@@ -5,6 +5,18 @@ const data = [
     tab: 'shelter',
     effects: [{ type: 'updateResources', payload: { food: 5, wood: 5 } }],
   },
+  {
+    name: 'Farm',
+    color: '#e6cc3b',
+    tab: 'farm',
+    effects: [{ type: 'updateResources', payload: { food: 50 } }],
+  },
+  {
+    name: 'Lumber',
+    color: '#e6cc3b',
+    tab: 'forestry',
+    effects: [{ type: 'updateResources', payload: { wood: 50 } }],
+  },
 ]
 
 const hydratedData = data.map(obj => ({

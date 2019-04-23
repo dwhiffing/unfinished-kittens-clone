@@ -17,7 +17,10 @@ const Building = ({ name, value, onClick, canAfford, prices }) => (
 
 const BuildingsList = ({ tab, unlocks, resources, buildings, buyBuilding }) =>
   buildings
-    .filter(building => building.tab === tab && unlocks.includes(building.name))
+    .filter(
+      building =>
+        !tab || (building.tab === tab && unlocks.includes(building.name))
+    )
     .map(building => (
       <Building
         key={building.name}

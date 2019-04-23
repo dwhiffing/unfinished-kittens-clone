@@ -1,14 +1,5 @@
 const data = [
   {
-    // label, description, unlockRatio, unlockable, priceRatio, flavor
-    name: 'farm',
-    value: 0,
-    prices: { food: 10 },
-    effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', value: 0.125 } },
-    ],
-  },
-  {
     name: 'house',
     value: 0,
     prices: { wood: 5 },
@@ -19,8 +10,18 @@ const data = [
     ],
   },
   {
-    name: 'barn',
-    tab: 'shelter',
+    // label, description, unlockRatio, unlockable, priceRatio, flavor
+    name: 'field',
+    tab: 'farm',
+    value: 0,
+    prices: { food: 10 },
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'food', value: 0.125 } },
+    ],
+  },
+  {
+    name: 'Lumberhouse',
+    tab: 'forestry',
     value: 0,
     prices: { wood: 10 },
     effects: [{ type: 'maxResource', payload: { name: 'wood', value: 100 } }],

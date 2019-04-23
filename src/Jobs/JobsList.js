@@ -33,7 +33,7 @@ const JobsList = ({
       Available workers: {availableWorkers}/{totalWorkers}
     </p>
     {jobs
-      .filter(job => job.tab === tab && job.isUnlocked({ resources }))
+      .filter(job => !tab || (job.tab === tab && job.isUnlocked({ resources })))
       .map(job => (
         <Job
           key={job.name}

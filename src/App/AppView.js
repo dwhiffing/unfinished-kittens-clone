@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
-import Shelter from '../Shelter'
+import Shelter from './ShelterView'
+import Farm from './FarmView'
 import Jobs from '../Jobs'
 import Resources from '../Resources'
 import Links from './Links'
 import { TICK_DURATION } from '../constants'
+import Forestry from './ForestryView'
 
 const AppView = ({ save, load, tick, triggerCommand, state }) => {
   if (state.app.loading) {
@@ -32,6 +34,8 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
         <div style={{ flex: 2, padding: 10 }}>
           <div>
             <Route exact path="/" component={Shelter} />
+            <Route exact path="/farm" component={Farm} />
+            <Route exact path="/forestry" component={Forestry} />
             <Route exact path="/buildings" component={Buildings} />
             <Route exact path="/jobs" component={Jobs} />
           </div>

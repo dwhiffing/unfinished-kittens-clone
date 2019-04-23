@@ -5,7 +5,7 @@ export const getResourcesGainedPerTick = (buildings, jobs) => {
       .filter(effect => effect.type === 'resourcePerTick')
       .forEach(({ payload: { name, value } }) => {
         obj[name] = obj[name] || 0
-        obj[name] = value * thing.value
+        obj[name] += value * thing.value
       })
   })
   return obj

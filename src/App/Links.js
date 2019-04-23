@@ -9,6 +9,8 @@ const mapDispatchToProps = dispatch => ({})
 const Links = () => (
   <div className="flex flex-column">
     <Link to="/">Bonfire</Link>
+    <Link to="/farm">Farm</Link>
+    <Link to="/forestry">Forestry</Link>
     <Link
       to=""
       onClick={() => {
