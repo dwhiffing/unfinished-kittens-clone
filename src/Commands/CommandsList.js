@@ -9,17 +9,14 @@ const Command = ({
 }) => (
   <div onClick={canAfford ? onClick : null} className="button command">
     <p style={{ color: canAfford ? color : 'red' }}>{name}</p>
-    <p>{summary[0].map(([resource, value]) => `${resource}: ${value},`)}</p>
+    <p>{summary}</p>
   </div>
 )
 
 const CommandsList = ({ tab, commands, triggerCommand, resources }) => (
   <div className="flex flex-column">
     {commands
-      .filter(
-        command => command.tab === tab
-        // && unlocks.includes(command.name)
-      )
+      .filter(command => command.tab === tab)
       .map(command => (
         <Command
           key={`command-${command.name}`}

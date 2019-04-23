@@ -3,7 +3,16 @@ const data = [
     name: 'Scavenge',
     color: '#e6cc3b',
     tab: 'shelter',
-    effects: [{ type: 'updateResources', payload: { food: 5, wood: 5 } }],
+    summaryLabel: 'Scavenge some food',
+    effects: [
+      {
+        type: 'updateResources',
+        payload: {
+          food: [2, 4, 5, 6, 8, 10],
+          wood: [0, 0, 0, 0, 0, 0, 0, 0.1],
+        },
+      },
+    ],
   },
   {
     name: 'Farm',
@@ -22,9 +31,13 @@ const data = [
 const hydratedData = data.map(obj => ({
   ...obj,
   summary() {
+    if (this.summaryLabel) {
+      return this.summaryLabel
+    }
     return this.effects
       .filter(({ type, payload }) => type === 'updateResources')
       .map(effect => Object.entries(effect.payload))
+      .join('')
   },
   getPrices() {
     let prices = {}
