@@ -6,6 +6,7 @@ const appReducer = (state, action) => {
     let obj = { ...INITIAL_MODELS, app: {} }
     obj.resources = state.resources.map(({ name, value }) => [name, value])
     obj.buildings = state.buildings.map(({ name, value }) => [name, value])
+    obj.science = state.science.map(({ name, value }) => [name, value])
     obj.jobs = state.jobs.map(({ name, value }) => [name, value])
     obj.app.unlocks = state.app.unlocks
     localStorage.setItem('save', JSON.stringify(obj))
@@ -19,16 +20,33 @@ const appReducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    const { app, buildings, resources, tabs } = state
+    const { app, buildings, resources, tabs, jobs, science } = state
     const unlocks = [...app.unlocks]
-    const possibleUnlocks = [...resources, ...buildings, ...tabs]
+    const possibleUnlocks = [
+      ...resources,
+      ...buildings,
+      ...tabs,
+      ...jobs,
+      ...science,
+    ]
     possibleUnlocks
       .filter(
         possibleUnlock =>
           !unlocks.find(unlock => unlock.name === possibleUnlock.name)
       )
       .forEach(unlockable => {
-        if (unlockable.isUnlocked({ buildings, resources, tabs })) {
+        let isUnlocked =
+          !unlockable.unlockRequirements ||
+          Object.entries(unlockable.unlockRequirements).filter(
+            ([resourceName, price]) => {
+              const resource = resources.find(
+                ({ name }) => name === resourceName
+              )
+              return resource.value - price < 0
+            }
+          ).length === 0
+
+        if (isUnlocked) {
           unlocks.push(unlockable)
         }
       })

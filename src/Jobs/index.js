@@ -2,9 +2,10 @@ import { connect } from '../storeContext'
 import JobsList from './JobsList'
 import { getAvailableWorkers, getTotalWorkers } from './utils'
 
-const mapStateToProps = ({ jobs, resources }) => ({
+const mapStateToProps = ({ app: { unlocks }, jobs, resources }) => ({
   jobs,
   resources,
+  unlocks,
   availableWorkers: getAvailableWorkers({ jobs, resources }),
   totalWorkers: getTotalWorkers(resources),
 })

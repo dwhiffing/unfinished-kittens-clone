@@ -22,21 +22,28 @@ const Job = ({ name, value, updateJobs, canAfford, summary }) => (
 
 const JobsList = ({
   jobs,
-  resources,
   tab,
+  unlocks,
   updateJobs,
   availableWorkers,
   totalWorkers,
-}) => (
-  <>
-    {totalWorkers.length > 0 && (
+}) => {
+  const availableJobs = jobs.filter(
+    job =>
+      !tab ||
+      (job.tab === tab && unlocks.find(unlock => unlock.name === job.name))
+  )
+
+  if (totalWorkers === 0 || availableJobs.length === 0) {
+    return false
+  }
+
+  return (
+    <>
       <p>
         Available workers: {availableWorkers}/{totalWorkers}
       </p>
-    )}
-    {jobs
-      .filter(job => !tab || (job.tab === tab && job.isUnlocked({ resources })))
-      .map(job => (
+      {availableJobs.map(job => (
         <Job
           key={job.name}
           {...job}
@@ -50,7 +57,8 @@ const JobsList = ({
           }
         />
       ))}
-  </>
-)
+    </>
+  )
+}
 
 export default JobsList

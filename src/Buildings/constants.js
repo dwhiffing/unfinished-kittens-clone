@@ -3,6 +3,7 @@ const data = [
     name: 'hut',
     value: 0,
     prices: { wood: 10 },
+    unlockRequirements: { wood: 5 },
     tab: 'shelter',
     effects: [
       { type: 'maxResource', payload: { name: 'folks', value: 2 } },
@@ -14,7 +15,8 @@ const data = [
     name: 'field',
     tab: 'farm',
     value: 0,
-    prices: { food: 10 },
+    prices: { food: 2000 },
+    unlockRequirements: { food: 1500 },
     effects: [
       { type: 'resourcePerTick', payload: { name: 'food', value: 0.125 } },
     ],
@@ -23,19 +25,14 @@ const data = [
     name: 'Lumberhouse',
     tab: 'forestry',
     value: 0,
-    prices: { wood: 10 },
+    prices: { wood: 100 },
+    unlockRequirements: { wood: 75 },
     effects: [{ type: 'maxResource', payload: { name: 'wood', value: 100 } }],
   },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
-  isUnlocked({ resources }) {
-    return Object.entries(this.prices).every(([resourceName, price]) => {
-      const currentResource = resources.find(r => r.name === resourceName).value
-      return currentResource > price / 2
-    })
-  },
   getNextCost() {
     const obj = {}
 

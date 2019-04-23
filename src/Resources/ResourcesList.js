@@ -35,9 +35,10 @@ const Resource = ({ name, value, max, color, perSecond }) => (
           <span style={{ color: '#aaa' }}> /{max}</span>
         </p>
       </div>
-      {perSecond > 0 && (
-        <p style={{ marginLeft: -5, fontSize: 11 }}>+{perSecond}/sec</p>
-      )}
+      <p style={{ marginLeft: -5, fontSize: 11 }}>
+        {perSecond > 0 && '+'}
+        {perSecond}/sec
+      </p>
     </div>
   </div>
 )

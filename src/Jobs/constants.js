@@ -36,16 +36,6 @@ const hydratedData = data.map(obj => ({
       .filter(({ type }) => type === 'resourcePerTick')
       .map(({ payload }) => `${payload.value * 5} ${payload.name} /sec`)}`
   },
-  isUnlocked({ resources }) {
-    return (
-      Object.entries(this.unlockRequirements).filter(
-        ([resourceName, price]) => {
-          const resource = resources.find(({ name }) => name === resourceName)
-          return resource.value - price < 0
-        }
-      ).length === 0
-    )
-  },
 }))
 
 export default hydratedData

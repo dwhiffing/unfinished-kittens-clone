@@ -2,6 +2,7 @@ import resources from './Resources/constants'
 import buildings from './Buildings/constants'
 import commands from './Commands/constants'
 import jobs from './Jobs/constants'
+import science from './Science/constants'
 import tabs from './Tabs/constants'
 
 const data = {
@@ -9,6 +10,7 @@ const data = {
   buildings,
   commands,
   jobs,
+  science,
   tabs,
 }
 

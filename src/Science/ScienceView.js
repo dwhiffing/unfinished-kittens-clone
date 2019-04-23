@@ -16,21 +16,33 @@ const ScienceList = ({ name, isPurchased, onClick, canAfford, prices }) => (
   </div>
 )
 
-const ScienceView = ({ unlocks, resources, science, buyScience }) =>
-  science
-    .filter(science => unlocks.includes(science.name))
-    .map(science => (
-      <ScienceList
-        key={science.name}
-        {...science}
-        isPurchased={science.value > 0}
-        canAfford={science.value === 1 || science.getCanAfford(resources)}
-        onClick={() =>
-          science.getCanAfford(resources) &&
-          science.value === 0 &&
-          buyScience(science)
-        }
-      />
-    ))
+const ScienceView = ({ tab, unlocks, resources, science, buyScience }) => {
+  const availableScience = science
+    .filter(science => science.tab === tab)
+    .filter(science => unlocks.find(unlock => unlock.name === science.name))
+
+  if (availableScience.length === 0) {
+    return false
+  }
+
+  return (
+    <>
+      <p>Research</p>
+      {availableScience.map(science => (
+        <ScienceList
+          key={science.name}
+          {...science}
+          isPurchased={science.value > 0}
+          canAfford={science.value === 1 || science.getCanAfford(resources)}
+          onClick={() =>
+            science.getCanAfford(resources) &&
+            science.value === 0 &&
+            buyScience(science)
+          }
+        />
+      ))}
+    </>
+  )
+}
 
 export default ScienceView

@@ -1,32 +1,36 @@
 const data = [
   {
-    name: 'agriculture',
-    prices: { science: 0 },
-    value: 1,
-    effects: [{ type: 'unlockJob', payload: { name: 'farmer' } }],
+    name: 'baskets',
+    tab: 'shelter',
+    prices: { food: 200, wood: 5 },
+    unlockRequirements: { food: 100, wood: 2 },
+    value: 0,
+    effects: [
+      { type: 'improveCommand', payload: { name: 'scavenge', value: 2 } },
+    ],
   },
   {
-    name: 'woodcutting',
-    prices: { science: 10 },
+    name: 'hoes',
+    tab: 'farm',
+    prices: { food: 2000, wood: 100 },
+    unlockRequirements: { food: 1500, wood: 65 },
     value: 0,
-    effects: [{ type: 'unlockJob', payload: { name: 'woodcutter' } }],
+    effects: [
+      { type: 'improveCommand', payload: { name: 'harvest', value: 2 } },
+    ],
   },
   {
-    name: 'archery',
-    prices: { science: 50 },
+    name: 'axes',
+    tab: 'forestry',
+    prices: { food: 5000, wood: 100 },
+    unlockRequirements: { food: 3000, wood: 80 },
     value: 0,
-    effects: [{ type: 'unlockJob', payload: { name: 'hunter' } }],
+    effects: [{ type: 'improveCommand', payload: { name: 'chop', value: 2 } }],
   },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
-  isUnlocked({ resources }) {
-    return Object.entries(this.prices).every(([resourceName, price]) => {
-      const currentResource = resources.find(r => r.name === resourceName).value
-      return currentResource > price / 2 || price <= 10
-    })
-  },
   getCanAfford(resources) {
     return (
       Object.entries(this.prices).filter(([resourceName, prices]) => {

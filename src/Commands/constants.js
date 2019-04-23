@@ -1,6 +1,6 @@
 const data = [
   {
-    name: 'Scavenge',
+    name: 'scavenge',
     color: '#e6cc3b',
     tab: 'shelter',
     summaryLabel: 'Scavenge some food',
@@ -9,19 +9,34 @@ const data = [
         type: 'updateResources',
         payload: {
           food: [2, 4, 5, 6, 8, 10],
-          wood: [0, 0, 0, 0, 0, 0, 0, 0.1],
+          wood: [0, 0, 0, 0, 0.05, 0.05, 0.1, 0.15],
         },
       },
     ],
   },
   {
-    name: 'Farm',
+    name: 'scavenge-cheat',
+    color: '#e6cc3b',
+    tab: 'shelter',
+    summaryLabel: 'Scavenge some food',
+    effects: [
+      {
+        type: 'updateResources',
+        payload: {
+          food: 100 || [2, 4, 5, 6, 8, 10],
+          wood: 10 || [0, 0, 0, 0, 0.05, 0.05, 0.1, 0.15],
+        },
+      },
+    ],
+  },
+  {
+    name: 'harvest',
     color: '#e6cc3b',
     tab: 'farm',
     effects: [{ type: 'updateResources', payload: { food: 50 } }],
   },
   {
-    name: 'Lumber',
+    name: 'chop',
     color: '#e6cc3b',
     tab: 'forestry',
     effects: [{ type: 'updateResources', payload: { wood: 50 } }],

@@ -16,11 +16,13 @@ const data = [
   {
     name: 'wood',
     value: 0,
+    unlockRequirements: { wood: 0.01 },
     color: '#b7612c',
     max: 100,
   },
   {
     name: 'folks',
+    unlockRequirements: { folks: 0.01 },
     value: 0,
     color: 'purple',
     max: 0,
@@ -29,9 +31,6 @@ const data = [
 
 const hydratedData = data.map(obj => ({
   ...obj,
-  isUnlocked() {
-    return this.value > 0
-  },
   getMax(buildings) {
     const extra = buildings.reduce((prev, curr) => {
       const effect = curr.effects.find(
