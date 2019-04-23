@@ -22,7 +22,6 @@ const Job = ({ name, value, updateJobs, canAfford, summary }) => (
 
 const JobsList = ({
   jobs,
-  science,
   buildings,
   updateJobs,
   availableWorkers,
@@ -33,7 +32,7 @@ const JobsList = ({
       Available workers: {availableWorkers}/{totalWorkers}
     </p>
     {jobs
-      .filter(job => job.isUnlocked({ buildings, science }))
+      .filter(job => job.isUnlocked({ buildings }))
       .map(job => (
         <Job
           key={job.name}

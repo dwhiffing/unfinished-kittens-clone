@@ -10,7 +10,6 @@ const Links = ({ unlocks }) => (
   <div className="flex flex-column">
     <Link to="/">Bonfire</Link>
     {unlocks.includes('folks') && <Link to="/jobs">Village</Link>}
-    {unlocks.includes('science') && <Link to="/science">Science</Link>}
   </div>
 )
 

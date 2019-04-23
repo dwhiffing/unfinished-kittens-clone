@@ -20,12 +20,6 @@ const data = [
     max: 0,
   },
   {
-    name: 'science',
-    value: 0,
-    color: 'blue',
-    max: 100,
-  },
-  {
     name: 'manpower',
     value: 0,
     color: 'yellow',

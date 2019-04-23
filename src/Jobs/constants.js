@@ -7,13 +7,6 @@ const data = [
     ],
   },
   {
-    name: 'scientist',
-    value: 0,
-    effects: [
-      { type: 'resourcePerTick', payload: { name: 'science', value: 0.02 } },
-    ],
-  },
-  {
     name: 'woodcutter',
     value: 0,
     effects: [
@@ -36,9 +29,9 @@ const hydratedData = data.map(obj => ({
       .filter(({ type }) => type === 'resourcePerTick')
       .map(({ payload }) => `${payload.value * 5} ${payload.name} /sec`)}`
   },
-  isUnlocked({ buildings, science }) {
+  isUnlocked({ buildings }) {
     let isUnlocked = false
-    const things = buildings.concat(science).filter(thing => thing.value > 0)
+    const things = buildings.filter(thing => thing.value > 0)
     things.forEach(thing => {
       thing.effects.forEach(effect => {
         if (

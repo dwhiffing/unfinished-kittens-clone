@@ -6,7 +6,6 @@ const appReducer = (state, action) => {
     let obj = { ...INITIAL_MODELS, app: { unlocks: [] } }
     obj.resources = state.resources.map(({ name, value }) => [name, value])
     obj.buildings = state.buildings.map(({ name, value }) => [name, value])
-    obj.science = state.science.map(({ name, value }) => [name, value])
     obj.jobs = state.jobs.map(({ name, value }) => [name, value])
     obj.app.unlocks = state.app.unlocks
     localStorage.setItem('save', JSON.stringify(obj))
@@ -21,14 +20,11 @@ const appReducer = (state, action) => {
 
   if (action.type === 'TICK') {
     const unlocks = [...state.app.unlocks]
-    const unlockables = state.resources
-      .concat(state.buildings)
-      .concat(state.science)
+    const unlockables = state.resources.concat(state.buildings)
     const remaining = unlockables.filter(u => !unlocks.includes(u.name))
     remaining.forEach(unlockable => {
       if (
         unlockable.isUnlocked({
-          science: state.science,
           buildings: state.buildings,
           resources: state.resources,
         })

@@ -35,7 +35,6 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
           <div>
             <Route exact path="/" component={Buildings} />
             <Route exact path="/jobs" component={Jobs} />
-            <Route exact path="/science" component={Science} />
           </div>
         </div>
       </div>
