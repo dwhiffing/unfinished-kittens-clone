@@ -15,7 +15,7 @@ const resourcesReducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    const perTick = getResourcesGainedPerTick(state.buildings, state.jobs)
+    const perTick = getResourcesGainedPerTick(state)
     return u(updateResources(perTick, state), state).resources
   }
 

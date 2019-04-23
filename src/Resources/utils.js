@@ -1,12 +1,16 @@
-export const getResourcesGainedPerTick = (buildings, jobs) => {
+export const getResourcesGainedPerTick = ({ resources, buildings, jobs }) => {
   const obj = {}
-  buildings.concat(jobs).forEach(thing => {
-    thing.effects
-      .filter(effect => effect.type === 'resourcePerTick')
-      .forEach(({ payload: { name, value } }) => {
-        obj[name] = obj[name] || 0
-        obj[name] += value * thing.value
-      })
-  })
+  resources
+    .concat(buildings)
+    .concat(jobs)
+    .forEach(({ effects = [], value: numberOfThing }) => {
+      effects
+        .filter(effect => effect.type === 'resourcePerTick')
+        .forEach(({ payload: { name, value, multiply = true } }) => {
+          obj[name] = obj[name] || 0
+          const finalValue = multiply ? value * numberOfThing : value
+          obj[name] += finalValue
+        })
+    })
   return obj
 }
