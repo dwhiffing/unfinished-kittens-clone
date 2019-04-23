@@ -1,3 +1,4 @@
+import { connect } from '../storeContext'
 import React from 'react'
 
 const ScienceList = ({ name, isPurchased, onClick, canAfford, prices }) => (
@@ -45,4 +46,18 @@ const ScienceView = ({ tab, unlocks, resources, science, buyScience }) => {
   )
 }
 
-export default ScienceView
+const mapStateToProps = ({ unlocks, resources, science }) => ({
+  resources,
+  science,
+  unlocks,
+})
+
+const mapDispatchToProps = dispatch => ({
+  buyScience: ({ name, prices }) =>
+    dispatch({ type: 'BUY_SCIENCE', payload: { name, prices } }),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScienceView)

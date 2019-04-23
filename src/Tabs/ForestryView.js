@@ -1,8 +1,8 @@
 import React from 'react'
-import Buildings from '../Buildings'
-import Commands from '../Commands'
-import Jobs from '../Jobs'
-import Science from '../Science'
+import Buildings from '../buildings/BuildingList'
+import Commands from '../commands/CommandList'
+import Jobs from '../jobs/JobList'
+import Science from '../science/ScienceList'
 
 const ForestryView = () => (
   <>

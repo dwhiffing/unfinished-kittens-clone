@@ -1,3 +1,4 @@
+import { connect } from '../storeContext'
 import React from 'react'
 
 const Building = ({ name, value, onClick, canAfford, prices }) => (
@@ -40,4 +41,18 @@ const BuildingsList = ({ tab, unlocks, resources, buildings, buyBuilding }) =>
       />
     ))
 
-export default BuildingsList
+const mapStateToProps = ({ unlocks, buildings, resources }) => ({
+  buildings,
+  unlocks,
+  resources,
+})
+
+const mapDispatchToProps = dispatch => ({
+  buyBuilding: building =>
+    dispatch({ type: 'BUY_BUILDING', payload: building }),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BuildingsList)

@@ -1,10 +1,10 @@
 import data from './constants'
-import resourcesReducer from './Resources/reducer'
-import buildingsReducer from './Buildings/reducer'
-import commandsReducer from './Commands/reducer'
-import scienceReducer from './Science/reducer'
-import jobsReducer from './Jobs/reducer'
-import unlockReducer from './Tabs/reducer'
+import resourcesReducer from './resources/reducer'
+import buildingsReducer from './buildings/reducer'
+import commandsReducer from './commands/reducer'
+import scienceReducer from './science/reducer'
+import jobsReducer from './jobs/reducer'
+import u from 'updeep'
 
 export const INITIAL_MODELS = {
   resources: [],
@@ -59,6 +59,48 @@ const combineReducers = (reducers, initialState = {}) => {
     })
     return nextReducers
   }
+}
+
+const unlockReducer = (state, action) => {
+  //TODO: This shouldn't be here
+  if (action.type === 'SAVE') {
+    let obj = { ...INITIAL_MODELS }
+    obj.resources = state.resources.map(({ name, value }) => [name, value])
+    obj.buildings = state.buildings.map(({ name, value }) => [name, value])
+    obj.science = state.science.map(({ name, value }) => [name, value])
+    obj.jobs = state.jobs.map(({ name, value }) => [name, value])
+    obj.unlocks = state.unlocks
+    localStorage.setItem('save', JSON.stringify(obj))
+  }
+
+  if (action.type === 'LOAD') {
+    return u([...action.payload.unlocks], state.unlocks)
+  }
+
+  if (action.type === 'TICK') {
+    const possibleUnlocks = [
+      ...state.resources,
+      ...state.buildings,
+      ...state.tabs,
+      ...state.jobs,
+      ...state.science,
+    ]
+    return u(
+      possibleUnlocks.filter(
+        unlockable =>
+          state.unlocks.find(unlock => unlock.name === unlockable.name) ||
+          !unlockable.unlockRequirements ||
+          Object.entries(unlockable.unlockRequirements).filter(
+            ([resource, price]) =>
+              state.resources.find(({ name }) => name === resource).value -
+                price <
+              0
+          ).length === 0
+      ),
+      state.unlocks
+    )
+  }
+  return state.unlocks
 }
 
 const reducer = combineReducers(

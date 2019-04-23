@@ -1,3 +1,5 @@
+import { connect } from '../storeContext'
+import { getAvailableWorkers, getTotalWorkers } from './utils'
 import React from 'react'
 
 const Job = ({ name, value, updateJobs, canAfford, summary }) => (
@@ -61,4 +63,19 @@ const JobsList = ({
   )
 }
 
-export default JobsList
+const mapStateToProps = ({ unlocks, jobs, resources }) => ({
+  jobs,
+  resources,
+  unlocks,
+  availableWorkers: getAvailableWorkers({ jobs, resources }),
+  totalWorkers: getTotalWorkers(resources),
+})
+
+const mapDispatchToProps = dispatch => ({
+  updateJobs: job => dispatch({ type: 'UPDATE_JOBS', payload: job }),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(JobsList)

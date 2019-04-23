@@ -1,9 +1,9 @@
-import resources from './Resources/constants'
-import buildings from './Buildings/constants'
-import commands from './Commands/constants'
-import jobs from './Jobs/constants'
-import science from './Science/constants'
-import tabs from './Tabs/constants'
+import resources from './resources/constants'
+import buildings from './buildings/constants'
+import commands from './commands/constants'
+import jobs from './jobs/constants'
+import science from './science/constants'
+import tabs from './tabs/constants'
 
 const data = {
   resources,
@@ -15,5 +15,3 @@ const data = {
 }
 
 export default data
-
-export const TICK_DURATION = 200
