@@ -1,8 +1,8 @@
 const data = [
   {
-    name: 'house',
+    name: 'hut',
     value: 0,
-    prices: { wood: 5 },
+    prices: { wood: 10 },
     tab: 'shelter',
     effects: [
       { type: 'maxResource', payload: { name: 'folks', value: 2 } },

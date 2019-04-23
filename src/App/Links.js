@@ -17,7 +17,6 @@ const Links = () => (
         const shouldReset = window.confirm('sure?')
         if (shouldReset) {
           localStorage.removeItem('save')
-          localStorage.removeItem('unlocks')
           document.location.reload()
         }
       }}>
