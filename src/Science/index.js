@@ -1,7 +1,7 @@
 import { connect } from '../storeContext'
 import ScienceView from './ScienceView'
 
-const mapStateToProps = ({ app: { unlocks }, resources, science }) => ({
+const mapStateToProps = ({ unlocks, resources, science }) => ({
   resources,
   science,
   unlocks,

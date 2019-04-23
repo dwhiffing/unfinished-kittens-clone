@@ -2,7 +2,7 @@ import { connect } from '../storeContext'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const mapStateToProps = ({ app: { unlocks } }) => ({ unlocks })
+const mapStateToProps = ({ unlocks }) => ({ unlocks })
 
 const mapDispatchToProps = dispatch => ({})
 

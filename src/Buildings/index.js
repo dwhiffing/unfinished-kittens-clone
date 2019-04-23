@@ -1,7 +1,7 @@
 import { connect } from '../storeContext'
 import BuildingsList from './BuildingsList'
 
-const mapStateToProps = ({ app: { unlocks }, buildings, resources }) => ({
+const mapStateToProps = ({ unlocks, buildings, resources }) => ({
   buildings,
   unlocks,
   resources,

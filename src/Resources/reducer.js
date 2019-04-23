@@ -1,7 +1,7 @@
 import u from 'updeep'
 import data from '../constants'
 import { getResourcesGainedPerTick } from './utils'
-import { updateSlice } from '../utils'
+import { updateSlice } from '../reducer'
 
 const updateResources = (...args) => updateSlice('resources', ...args)
 

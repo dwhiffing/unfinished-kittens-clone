@@ -2,26 +2,24 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
-import Shelter from '../Tabs/ShelterView'
-import Farm from '../Tabs/FarmView'
-import Forestry from '../Tabs/ForestryView'
+import Shelter from './ShelterView'
+import Farm from './FarmView'
+import Forestry from './ForestryView'
 import Jobs from '../Jobs'
 import Resources from '../Resources'
 import Links from './Links'
 import { TICK_DURATION } from '../constants'
 
-const AppView = ({ save, load, tick, triggerCommand, state }) => {
-  if (state.app.loading) {
+const TabView = ({ load, tick }) => {
+  useEffect(() => {
     load()
-    return false
-  }
-
-  useEffect(() => {
-    setInterval(tick, TICK_DURATION)
-  }, [])
-
-  useEffect(() => {
-    setInterval(save, TICK_DURATION)
+    let i = 0
+    setInterval(() => {
+      if (i > 20) {
+        i = 0
+      }
+      tick(i++)
+    }, TICK_DURATION)
   }, [])
 
   return (
@@ -45,4 +43,4 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
   )
 }
 
-export default AppView
+export default TabView
