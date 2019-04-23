@@ -2,14 +2,13 @@ import { connect } from '../storeContext'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const mapStateToProps = ({ app: { unlocks } }) => ({ unlocks })
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = dispatch => ({})
 
-const Links = ({ unlocks }) => (
+const Links = () => (
   <div className="flex flex-column">
     <Link to="/">Bonfire</Link>
-    {unlocks.includes('folks') && <Link to="/jobs">Village</Link>}
   </div>
 )
 

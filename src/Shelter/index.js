@@ -1,9 +1,15 @@
 import { connect } from '../storeContext'
-import BuildingsList from './BuildingsList'
+import ShelterView from './ShelterView'
 
-const mapStateToProps = ({ app: { unlocks }, buildings, resources }) => ({
+const mapStateToProps = ({
+  app: { unlocks },
+  buildings,
+  resources,
+  commands,
+}) => ({
   buildings,
   unlocks,
+  commands,
   resources,
 })
 
@@ -15,4 +21,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BuildingsList)
+)(ShelterView)

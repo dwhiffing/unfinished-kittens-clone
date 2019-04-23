@@ -12,15 +12,19 @@ const data = [
     name: 'house',
     value: 0,
     prices: { wood: 5 },
-    tab: 'shelter',
     effects: [
       { type: 'maxResource', payload: { name: 'folks', value: 2 } },
       { type: 'resourcePerTick', payload: { name: 'folks', value: 0.0125 } },
     ],
   },
   {
+    name: 'library',
+    value: 0,
+    prices: { wood: 10 },
+    effects: [{ type: 'unlockJob', payload: { name: 'scientist' } }],
+  },
+  {
     name: 'barn',
-    tab: 'shelter',
     value: 0,
     prices: { wood: 10 },
     effects: [{ type: 'maxResource', payload: { name: 'wood', value: 100 } }],

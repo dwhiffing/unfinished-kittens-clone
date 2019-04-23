@@ -1,42 +1,19 @@
 const data = [
   {
-    name: 'Gather food',
+    name: 'Scavenge',
     color: '#e6cc3b',
-    effects: [{ type: 'updateResources', payload: { food: 1 } }],
-  },
-  {
-    name: 'Gather 100 food (CHEAT)',
-    color: '#e6cc3b',
-    effects: [{ type: 'updateResources', payload: { food: 100 } }],
-  },
-  {
-    name: '100 food -> 1 wood',
-    color: '#b7612c',
-    effects: [
-      { type: 'updateResources', payload: { food: -100 } },
-      { type: 'updateResources', payload: { wood: 1 } },
-    ],
-  },
-  {
-    name: 'Hunt',
-    color: 'cyan',
-    effects: [
-      { type: 'updateResources', payload: { manpower: -10 } },
-      { type: 'updateResources', payload: { fur: 10 } },
-    ],
-  },
-  {
-    name: 'Reset',
-    effects: [
-      {
-        type: 'resetSave',
-      },
-    ],
+    tab: 'shelter',
+    effects: [{ type: 'updateResources', payload: { food: 5, wood: 5 } }],
   },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
+  summary() {
+    return this.effects
+      .filter(({ type, payload }) => type === 'updateResources')
+      .map(effect => Object.entries(effect.payload))
+  },
   getPrices() {
     let prices = {}
     let effects = this.effects || []

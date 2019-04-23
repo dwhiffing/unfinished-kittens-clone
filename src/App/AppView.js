@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
-import Science from '../Science'
+import Shelter from '../Shelter'
 import Jobs from '../Jobs'
-import Commands from '../Commands'
 import Resources from '../Resources'
 import Links from './Links'
 import { TICK_DURATION } from '../constants'
@@ -28,12 +27,12 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
       <div className="flex flex-row height-100">
         <div className="flex flex-column" style={{ flex: 1, padding: 10 }}>
           <Links />
-          <Commands />
           <Resources />
         </div>
         <div style={{ flex: 2, padding: 10 }}>
           <div>
-            <Route exact path="/" component={Buildings} />
+            <Route exact path="/" component={Shelter} />
+            <Route exact path="/buildings" component={Buildings} />
             <Route exact path="/jobs" component={Jobs} />
           </div>
         </div>

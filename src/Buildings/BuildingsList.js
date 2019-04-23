@@ -15,9 +15,9 @@ const Building = ({ name, value, onClick, canAfford, prices }) => (
   </div>
 )
 
-const Buildings = ({ unlocks, resources, buildings, buyBuilding }) =>
+const BuildingsList = ({ tab, unlocks, resources, buildings, buyBuilding }) =>
   buildings
-    .filter(building => unlocks.includes(building.name))
+    .filter(building => building.tab === tab && unlocks.includes(building.name))
     .map(building => (
       <Building
         key={building.name}
@@ -35,4 +35,4 @@ const Buildings = ({ unlocks, resources, buildings, buyBuilding }) =>
       />
     ))
 
-export default Buildings
+export default BuildingsList

@@ -1,5 +1,5 @@
 import { connect } from '../storeContext'
-import JobsView from './JobsView'
+import JobsList from './JobsList'
 import { getAvailableWorkers, getTotalWorkers } from './utils'
 
 const mapStateToProps = ({ jobs, buildings, resources }) => ({
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(JobsView)
+)(JobsList)
