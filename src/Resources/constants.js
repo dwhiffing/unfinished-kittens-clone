@@ -25,6 +25,18 @@ const data = [
     color: 'blue',
     max: 100,
   },
+  {
+    name: 'manpower',
+    value: 0,
+    color: 'yellow',
+    max: 400,
+  },
+  {
+    name: 'fur',
+    value: 0,
+    color: 'purple',
+    max: 400,
+  },
 ]
 
 const hydratedData = data.map(obj => ({

@@ -11,6 +11,12 @@ const data = [
     value: 0,
     effects: [{ type: 'unlockJob', payload: { name: 'woodcutter' } }],
   },
+  {
+    name: 'archery',
+    prices: { science: 50 },
+    value: 0,
+    effects: [{ type: 'unlockJob', payload: { name: 'hunter' } }],
+  },
 ]
 
 const hydratedData = data.map(obj => ({

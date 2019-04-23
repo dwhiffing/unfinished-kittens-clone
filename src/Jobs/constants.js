@@ -20,6 +20,13 @@ const data = [
       { type: 'resourcePerTick', payload: { name: 'wood', value: 0.02 } },
     ],
   },
+  {
+    name: 'hunter',
+    value: 0,
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'manpower', value: 0.034 } },
+    ],
+  },
 ]
 
 const hydratedData = data.map(obj => ({

@@ -18,6 +18,14 @@ const data = [
     ],
   },
   {
+    name: 'Hunt',
+    color: 'cyan',
+    effects: [
+      { type: 'updateResources', payload: { manpower: -10 } },
+      { type: 'updateResources', payload: { fur: 10 } },
+    ],
+  },
+  {
     name: 'Reset',
     effects: [
       {
