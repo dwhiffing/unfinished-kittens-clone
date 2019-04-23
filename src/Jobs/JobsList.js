@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Job = ({ name, value, updateJobs, canAfford }) => (
+const Job = ({ name, value, updateJobs, canAfford, summary }) => (
   <div className="flex justify-between align-center job">
     <p style={{ color: canAfford ? 'white' : 'red' }}>
       {name} ({value})
     </p>
+    <p>{summary}</p>
     <div className="flex">
       <div
         className="button small"
@@ -19,24 +20,34 @@ const Job = ({ name, value, updateJobs, canAfford }) => (
   </div>
 )
 
-const JobsList = ({ jobs, updateJobs, availableWorkers, totalWorkers }) => (
+const JobsList = ({
+  jobs,
+  science,
+  buildings,
+  updateJobs,
+  availableWorkers,
+  totalWorkers,
+}) => (
   <>
     <p>
       Available workers: {availableWorkers}/{totalWorkers}
     </p>
-    {jobs.map(job => (
-      <Job
-        key={job.name}
-        {...job}
-        canAfford={availableWorkers > 0}
-        updateJobs={value =>
-          updateJobs({
-            name: job.name,
-            value,
-          })
-        }
-      />
-    ))}
+    {jobs
+      .filter(job => job.isUnlocked({ buildings, science }))
+      .map(job => (
+        <Job
+          key={job.name}
+          {...job}
+          summary={job.summary()}
+          canAfford={availableWorkers > 0}
+          updateJobs={value =>
+            updateJobs({
+              name: job.name,
+              value,
+            })
+          }
+        />
+      ))}
   </>
 )
 

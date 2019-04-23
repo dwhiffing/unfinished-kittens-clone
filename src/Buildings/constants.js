@@ -17,11 +17,17 @@ const data = [
       { type: 'resourcePerTick', payload: { name: 'folks', amount: 0.0125 } },
     ],
   },
+  {
+    name: 'library',
+    value: 0,
+    prices: { wood: 10 },
+    effects: [{ type: 'unlockJob', payload: { name: 'scientist' } }],
+  },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
-  isUnlocked(resources) {
+  isUnlocked({ resources }) {
     return Object.entries(this.prices).every(([resourceName, price]) => {
       const currentResource = resources.find(r => r.name === resourceName).value
       return currentResource > price / 2

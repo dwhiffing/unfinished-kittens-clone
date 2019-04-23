@@ -1,25 +1,21 @@
 const data = [
   {
-    name: 'calendar',
-    prices: { science: 10 },
-    value: 0,
-    effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', amount: 0.125 } },
-    ],
+    name: 'agriculture',
+    prices: { science: 0 },
+    value: 1,
+    effects: [{ type: 'unlockJob', payload: { name: 'farmer' } }],
   },
   {
-    name: 'archery',
-    prices: { science: 50 },
+    name: 'woodcutting',
+    prices: { science: 10 },
     value: 0,
-    effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', amount: 100 } },
-    ],
+    effects: [{ type: 'unlockJob', payload: { name: 'woodcutter' } }],
   },
 ]
 
 const hydratedData = data.map(obj => ({
   ...obj,
-  isUnlocked(resources) {
+  isUnlocked({ resources }) {
     return Object.entries(this.prices).every(([resourceName, price]) => {
       const currentResource = resources.find(r => r.name === resourceName).value
       return currentResource > price / 2 || price <= 10

@@ -26,7 +26,13 @@ const appReducer = (state, action) => {
       .concat(state.science)
     const remaining = unlockables.filter(u => !unlocks.includes(u.name))
     remaining.forEach(unlockable => {
-      if (unlockable.isUnlocked(state.resources)) {
+      if (
+        unlockable.isUnlocked({
+          science: state.science,
+          buildings: state.buildings,
+          resources: state.resources,
+        })
+      ) {
         unlocks.push(unlockable.name)
       }
     })
