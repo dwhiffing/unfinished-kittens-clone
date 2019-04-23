@@ -21,7 +21,6 @@ const appReducer = (state, action) => {
   if (action.type === 'TICK') {
     const { app, buildings, resources, tabs } = state
     const unlocks = [...app.unlocks]
-    console.log(buildings, resources, tabs)
     const possibleUnlocks = [...resources, ...buildings, ...tabs]
     possibleUnlocks
       .filter(
