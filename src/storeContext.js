@@ -3,11 +3,13 @@ import data from './constants'
 import resourcesReducer from './Resources/reducer'
 import buildingsReducer from './Buildings/reducer'
 import commandsReducer from './Commands/reducer'
+import scienceReducer from './Science/reducer'
 import jobsReducer from './Jobs/reducer'
 import appReducer from './App/reducer'
 
 export const INITIAL_MODELS = {
   resources: [],
+  science: [],
   buildings: [],
   commands: [],
   jobs: [],
@@ -34,6 +36,7 @@ const reducer = combineReducers(
     resources: resourcesReducer,
     commands: commandsReducer,
     buildings: buildingsReducer,
+    science: scienceReducer,
     jobs: jobsReducer,
     app: appReducer,
   },

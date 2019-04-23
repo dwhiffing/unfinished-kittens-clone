@@ -29,7 +29,7 @@ const Buildings = ({ unlocks, resources, buildings, buyBuilding }) =>
           buyBuilding({
             name: building.name,
             value: 1,
-            cost: building.getNextCost(),
+            prices: building.getNextCost(),
           })
         }
       />

@@ -23,9 +23,9 @@ const resourcesReducer = (state, action) => {
     return u(updateResources(action.payload, state), state).resources
   }
 
-  if (action.type === 'BUY_BUILDING') {
-    const { cost } = action.payload
-    return u(updateResources(cost, state, { negated: true }), state).resources
+  if (action.type === 'BUY_BUILDING' || action.type === 'BUY_SCIENCE') {
+    const { prices } = action.payload
+    return u(updateResources(prices, state, { negated: true }), state).resources
   }
   return state.resources
 }

@@ -44,9 +44,9 @@ const hydratedData = data.map(obj => ({
   },
   getCanAfford(resources) {
     return (
-      Object.entries(this.getPrices()).filter(([resourceName, cost]) => {
+      Object.entries(this.getPrices()).filter(([resourceName, prices]) => {
         const resource = resources.find(({ name }) => name === resourceName)
-        const value = resource.value - cost
+        const value = resource.value - prices
         return value < 0
       }).length === 0
     )

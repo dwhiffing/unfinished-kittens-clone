@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
+import Science from '../Science'
 import Jobs from '../Jobs'
 import Commands from '../Commands'
 import Resources from '../Resources'
@@ -34,6 +35,7 @@ const AppView = ({ save, load, tick, triggerCommand, state }) => {
           <div>
             <Route exact path="/" component={Buildings} />
             <Route exact path="/jobs" component={Jobs} />
+            <Route exact path="/science" component={Science} />
           </div>
         </div>
       </div>
