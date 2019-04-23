@@ -2,15 +2,20 @@ import { connect } from '../storeContext'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const mapStateToProps = () => ({})
+const mapStateToProps = ({ app: { unlocks } }) => ({ unlocks })
 
 const mapDispatchToProps = dispatch => ({})
 
-const Links = () => (
+const Links = ({ unlocks }) => (
   <div className="flex flex-column">
     <Link to="/">Bonfire</Link>
-    <Link to="/farm">Farm</Link>
-    <Link to="/forestry">Forestry</Link>
+
+    {unlocks.find(unlock => unlock.name === 'farm') && (
+      <Link to="/farm">Farm</Link>
+    )}
+    {unlocks.find(unlock => unlock.name === 'forestry') && (
+      <Link to="/forestry">Forestry</Link>
+    )}
     <Link
       to=""
       onClick={() => {

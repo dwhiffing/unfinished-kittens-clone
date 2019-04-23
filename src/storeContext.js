@@ -18,7 +18,6 @@ export const initialState = {
   ...INITIAL_MODELS,
   ...data,
 }
-
 const combineReducers = (reducers, initialState = {}) => {
   return (state = initialState, action) => {
     const nextReducers = {}
@@ -36,6 +35,7 @@ const reducer = combineReducers(
     buildings: buildingsReducer,
     jobs: jobsReducer,
     app: appReducer,
+    tabs: state => state.tabs,
   },
   initialState
 )

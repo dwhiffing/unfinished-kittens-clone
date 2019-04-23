@@ -1,12 +1,14 @@
 import React from 'react'
 import { getResourcesGainedPerTick } from './utils'
 
-const ResourcesList = ({ buildings, jobs, resources }) => {
-  const perTick = getResourcesGainedPerTick(buildings, jobs)
+const ResourcesList = ({ unlocks, buildings, jobs, resources }) => {
+  const perTick = getResourcesGainedPerTick({ resources, buildings, jobs })
   return (
     <div className="flex flex-column">
       {resources
-        .filter(resource => resource.visible || resource.value > 0)
+        .filter(resource =>
+          unlocks.find(unlock => unlock.name === resource.name)
+        )
         .map(resource => (
           <Resource
             key={`resource-${resource.name}`}

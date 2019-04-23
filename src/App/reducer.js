@@ -3,7 +3,7 @@ import { INITIAL_MODELS } from '../storeContext'
 
 const appReducer = (state, action) => {
   if (action.type === 'SAVE') {
-    let obj = { ...INITIAL_MODELS, app: { unlocks: [] } }
+    let obj = { ...INITIAL_MODELS, app: {} }
     obj.resources = state.resources.map(({ name, value }) => [name, value])
     obj.buildings = state.buildings.map(({ name, value }) => [name, value])
     obj.jobs = state.jobs.map(({ name, value }) => [name, value])
@@ -19,20 +19,22 @@ const appReducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    const unlocks = [...state.app.unlocks]
-    const unlockables = state.resources.concat(state.buildings)
-    const remaining = unlockables.filter(u => !unlocks.includes(u.name))
-    remaining.forEach(unlockable => {
-      if (
-        unlockable.isUnlocked({
-          buildings: state.buildings,
-          resources: state.resources,
-        })
-      ) {
-        unlocks.push(unlockable.name)
-      }
-    })
-    return u({ unlocks }, state.app)
+    const { app, buildings, resources, tabs } = state
+    const unlocks = [...app.unlocks]
+    console.log(buildings, resources, tabs)
+    const possibleUnlocks = [...resources, ...buildings, ...tabs]
+    possibleUnlocks
+      .filter(
+        possibleUnlock =>
+          !unlocks.find(unlock => unlock.name === possibleUnlock.name)
+      )
+      .forEach(unlockable => {
+        if (unlockable.isUnlocked({ buildings, resources, tabs })) {
+          unlocks.push(unlockable)
+        }
+      })
+
+    return u({ unlocks }, app)
   }
   return state.app
 }

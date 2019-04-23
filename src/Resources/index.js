@@ -1,10 +1,11 @@
 import { connect } from '../storeContext'
 import ResourcesList from './ResourcesList'
 
-const mapStateToProps = ({ buildings, resources, jobs }) => ({
+const mapStateToProps = ({ app: { unlocks }, buildings, resources, jobs }) => ({
   buildings,
   resources,
   jobs,
+  unlocks,
 })
 
 const mapDispatchToProps = dispatch => ({})

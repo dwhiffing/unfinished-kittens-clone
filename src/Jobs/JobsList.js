@@ -29,9 +29,11 @@ const JobsList = ({
   totalWorkers,
 }) => (
   <>
-    <p>
-      Available workers: {availableWorkers}/{totalWorkers}
-    </p>
+    {totalWorkers.length > 0 && (
+      <p>
+        Available workers: {availableWorkers}/{totalWorkers}
+      </p>
+    )}
     {jobs
       .filter(job => !tab || (job.tab === tab && job.isUnlocked({ resources })))
       .map(job => (

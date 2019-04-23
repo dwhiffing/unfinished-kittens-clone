@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import Buildings from '../Buildings'
-import Shelter from './ShelterView'
-import Farm from './FarmView'
+import Shelter from '../Tabs/ShelterView'
+import Farm from '../Tabs/FarmView'
+import Forestry from '../Tabs/ForestryView'
 import Jobs from '../Jobs'
 import Resources from '../Resources'
 import Links from './Links'
 import { TICK_DURATION } from '../constants'
-import Forestry from './ForestryView'
 
 const AppView = ({ save, load, tick, triggerCommand, state }) => {
   if (state.app.loading) {

@@ -19,7 +19,9 @@ const BuildingsList = ({ tab, unlocks, resources, buildings, buyBuilding }) =>
   buildings
     .filter(
       building =>
-        !tab || (building.tab === tab && unlocks.includes(building.name))
+        !tab ||
+        (building.tab === tab &&
+          unlocks.find(unlock => unlock.name === building.name))
     )
     .map(building => (
       <Building
