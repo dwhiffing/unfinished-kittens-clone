@@ -4,10 +4,10 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
   const updateToPush = { [key]: {} }
 
   Object.keys(updates).forEach(resourceName => {
-    const amount = updates[resourceName]
+    const value = updates[resourceName]
     const index = data[key].findIndex(({ name }) => name === resourceName)
     updateToPush[key][index] = resource => {
-      let newValue = resource.value + (negated ? -amount : amount)
+      let newValue = resource.value + (negated ? -value : value)
       // Enforce max if present
       if (resource.getMax) {
         const max = resource.getMax(state.buildings)

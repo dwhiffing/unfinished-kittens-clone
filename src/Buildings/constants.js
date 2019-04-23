@@ -5,7 +5,7 @@ const data = [
     value: 0,
     prices: { food: 10 },
     effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', amount: 0.125 } },
+      { type: 'resourcePerTick', payload: { name: 'food', value: 0.125 } },
     ],
   },
   {
@@ -13,8 +13,8 @@ const data = [
     value: 0,
     prices: { wood: 5 },
     effects: [
-      { type: 'maxResource', payload: { name: 'folks', amount: 2 } },
-      { type: 'resourcePerTick', payload: { name: 'folks', amount: 0.0125 } },
+      { type: 'maxResource', payload: { name: 'folks', value: 2 } },
+      { type: 'resourcePerTick', payload: { name: 'folks', value: 0.0125 } },
     ],
   },
   {
@@ -27,7 +27,7 @@ const data = [
     name: 'barn',
     value: 0,
     prices: { wood: 10 },
-    effects: [{ type: 'unlockJob', payload: { name: 'scientist' } }],
+    effects: [{ type: 'maxResource', payload: { name: 'wood', value: 100 } }],
   },
 ]
 

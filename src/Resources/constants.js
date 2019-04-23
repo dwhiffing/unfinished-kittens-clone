@@ -37,7 +37,10 @@ const hydratedData = data.map(obj => ({
       const effect = curr.effects.find(
         e => e.type === 'maxResource' && e.payload.name === this.name
       )
-      return effect ? effect.payload.amount * curr.value + prev : prev
+      if (effect) {
+        console.log(effect.payload, curr.value, prev)
+      }
+      return effect ? effect.payload.value * curr.value + prev : prev
     }, 0)
     return this.max + extra
   },

@@ -6,17 +6,17 @@ export const getResourcesGainedPerTick = (buildings, jobs) => {
     )
     if (resourceEffect) {
       const {
-        payload: { name, amount },
+        payload: { name, value },
       } = resourceEffect
-      obj[name] = amount * buildings[index].value
+      obj[name] = value * buildings[index].value
     }
   })
   jobs.forEach((job, index) => {
     const {
-      payload: { name, amount },
+      payload: { name, value },
     } = jobs[index].effects.find(effect => effect.type === 'resourcePerTick')
     obj[name] = obj[name] || 0
-    obj[name] += amount * jobs[index].value
+    obj[name] += value * jobs[index].value
   })
   return obj
 }
