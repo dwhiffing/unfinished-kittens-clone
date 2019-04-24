@@ -4,13 +4,16 @@ import Commands from '../commands/CommandList'
 import Jobs from '../jobs/JobList'
 import Science from '../science/ScienceList'
 
-const ShelterView = () => (
-  <>
-    <Commands tab="shelter" />
-    <Buildings tab="shelter" />
-    <Jobs tab="shelter" />
-    <Science tab="shelter" />
-  </>
-)
+const ShelterView = () => {
+  console.log('trest')
+  return (
+    <>
+      <Commands tab="shelter" />
+      <Buildings tab="shelter" />
+      <Jobs tab="shelter" />
+      <Science tab="shelter" />
+    </>
+  )
+}
 
 export default ShelterView

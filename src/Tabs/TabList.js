@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({})
 const TabList = ({ tabs }) => (
   <div className="flex flex-column">
     {tabs.map(tab => (
-      <Link key={`link-${tab.name}`} to={`/${tab.name}`}>
+      <Link key={`link-${tab.name}`} to={`/${tab.url}`}>
         {tab.name}
       </Link>
     ))}
