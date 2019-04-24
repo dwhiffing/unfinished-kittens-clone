@@ -5,6 +5,7 @@ import commandsReducer from './commands/reducer'
 import scienceReducer from './science/reducer'
 import jobsReducer from './jobs/reducer'
 import u from 'updeep'
+import { getNewUnlocks, getModelIndex, getModelMaxValue } from './selectors'
 
 export const INITIAL_MODELS = {
   resources: [],
@@ -21,33 +22,23 @@ export const initialState = {
   ...data,
 }
 
+const clamp = (n, { min, max }) => Math.min(Math.max(n, min), max)
+
 export const updateSlice = (key, updates, state, { negated } = {}) => {
   const updateToPush = { [key]: {} }
 
   Object.keys(updates).forEach(resourceName => {
     const value = updates[resourceName]
-    const index = data[key].findIndex(({ name }) => name === resourceName)
-    updateToPush[key][index] = resource => {
-      let newValue = resource.value + (negated ? -value : value)
-      // Enforce max if present
-      if (resource.getMax) {
-        const max = resource.getMax(state.buildings)
-        if (newValue > max) {
-          newValue = max
-        }
-      }
 
-      // Enforce min if present
-      if (newValue < 0) {
-        newValue = 0
-      }
-
-      return {
-        ...resource,
-        value: newValue,
-      }
-    }
+    updateToPush[key][getModelIndex(state, key, resourceName)] = resource => ({
+      ...resource,
+      value: clamp(resource.value + (negated ? value * -1 : value), {
+        min: 0,
+        max: getModelMaxValue(state, resource),
+      }),
+    })
   })
+
   return updateToPush
 }
 
@@ -78,28 +69,9 @@ const unlockReducer = (state, action) => {
   }
 
   if (action.type === 'TICK') {
-    const possibleUnlocks = [
-      ...state.resources,
-      ...state.buildings,
-      ...state.tabs,
-      ...state.jobs,
-      ...state.science,
-    ]
-    return u(
-      possibleUnlocks.filter(
-        unlockable =>
-          state.unlocks.find(unlock => unlock.name === unlockable.name) ||
-          !unlockable.unlockRequirements ||
-          Object.entries(unlockable.unlockRequirements).filter(
-            ([resource, price]) =>
-              state.resources.find(({ name }) => name === resource).value -
-                price <
-              0
-          ).length === 0
-      ),
-      state.unlocks
-    )
+    return u(getNewUnlocks(state), state.unlocks)
   }
+
   return state.unlocks
 }
 

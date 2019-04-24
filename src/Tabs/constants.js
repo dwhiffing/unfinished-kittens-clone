@@ -11,7 +11,7 @@ const data = [
   {
     name: 'forestry',
     unlockRequirements: {
-      wood: 50,
+      wood: 500,
     },
   },
 ]

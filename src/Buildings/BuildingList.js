@@ -1,5 +1,26 @@
 import { connect } from '../storeContext'
 import React from 'react'
+import { getUnlockedBuildings } from './selectors'
+
+const mapStateToProps = state => ({
+  buildings: getUnlockedBuildings(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+  buyBuilding: building =>
+    dispatch({ type: 'BUY_BUILDING', payload: { building, value: 1 } }),
+})
+
+const BuildingsList = ({ tab, buildings, buyBuilding }) =>
+  buildings
+    .filter(building => !tab || building.tab === tab)
+    .map(building => (
+      <Building
+        key={building.name}
+        {...building}
+        onClick={() => building.canAfford && buyBuilding(building)}
+      />
+    ))
 
 const Building = ({ name, value, onClick, canAfford, prices }) => (
   <div className="button building" onClick={onClick}>
@@ -15,42 +36,6 @@ const Building = ({ name, value, onClick, canAfford, prices }) => (
     ))}
   </div>
 )
-
-const BuildingsList = ({ tab, unlocks, resources, buildings, buyBuilding }) =>
-  buildings
-    .filter(
-      building =>
-        !tab ||
-        (building.tab === tab &&
-          unlocks.find(unlock => unlock.name === building.name))
-    )
-    .map(building => (
-      <Building
-        key={building.name}
-        {...building}
-        prices={building.getNextCost()}
-        canAfford={building.getCanAfford(resources)}
-        onClick={() =>
-          building.getCanAfford(resources) &&
-          buyBuilding({
-            name: building.name,
-            value: 1,
-            prices: building.getNextCost(),
-          })
-        }
-      />
-    ))
-
-const mapStateToProps = ({ unlocks, buildings, resources }) => ({
-  buildings,
-  unlocks,
-  resources,
-})
-
-const mapDispatchToProps = dispatch => ({
-  buyBuilding: building =>
-    dispatch({ type: 'BUY_BUILDING', payload: building }),
-})
 
 export default connect(
   mapStateToProps,

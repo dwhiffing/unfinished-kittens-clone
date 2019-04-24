@@ -1,6 +1,55 @@
 import { connect } from '../storeContext'
-import { getAvailableWorkers, getTotalWorkers } from './utils'
 import React from 'react'
+import {
+  getUnlockedJobs,
+  getAvailableWorkers,
+  getTotalWorkers,
+} from './selectors'
+
+const mapStateToProps = state => ({
+  jobs: getUnlockedJobs(state),
+  availableWorkers: getAvailableWorkers(state),
+  totalWorkers: getTotalWorkers(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+  updateJobs: job => dispatch({ type: 'UPDATE_JOBS', payload: job }),
+})
+
+const JobsList = ({
+  jobs,
+  tab,
+  updateJobs,
+  availableWorkers,
+  totalWorkers,
+}) => {
+  if (totalWorkers === 0 || jobs.length === 0) {
+    return false
+  }
+
+  return (
+    <>
+      <p>
+        Available workers: {availableWorkers}/{totalWorkers}
+      </p>
+      {jobs
+        .filter(job => !tab || job.tab === tab)
+        .map(job => (
+          <Job
+            key={job.name}
+            {...job}
+            canAfford={availableWorkers > 0}
+            updateJobs={value =>
+              updateJobs({
+                name: job.name,
+                value,
+              })
+            }
+          />
+        ))}
+    </>
+  )
+}
 
 const Job = ({ name, value, updateJobs, canAfford, summary }) => (
   <div className="flex justify-between align-center job">
@@ -21,59 +70,6 @@ const Job = ({ name, value, updateJobs, canAfford, summary }) => (
     </div>
   </div>
 )
-
-const JobsList = ({
-  jobs,
-  tab,
-  unlocks,
-  updateJobs,
-  availableWorkers,
-  totalWorkers,
-}) => {
-  const availableJobs = jobs.filter(
-    job =>
-      !tab ||
-      (job.tab === tab && unlocks.find(unlock => unlock.name === job.name))
-  )
-
-  if (totalWorkers === 0 || availableJobs.length === 0) {
-    return false
-  }
-
-  return (
-    <>
-      <p>
-        Available workers: {availableWorkers}/{totalWorkers}
-      </p>
-      {availableJobs.map(job => (
-        <Job
-          key={job.name}
-          {...job}
-          summary={job.summary()}
-          canAfford={availableWorkers > 0}
-          updateJobs={value =>
-            updateJobs({
-              name: job.name,
-              value,
-            })
-          }
-        />
-      ))}
-    </>
-  )
-}
-
-const mapStateToProps = ({ unlocks, jobs, resources }) => ({
-  jobs,
-  resources,
-  unlocks,
-  availableWorkers: getAvailableWorkers({ jobs, resources }),
-  totalWorkers: getTotalWorkers(resources),
-})
-
-const mapDispatchToProps = dispatch => ({
-  updateJobs: job => dispatch({ type: 'UPDATE_JOBS', payload: job }),
-})
 
 export default connect(
   mapStateToProps,

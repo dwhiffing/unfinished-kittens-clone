@@ -1,30 +1,30 @@
 import { connect } from '../storeContext'
 import React from 'react'
-import { getResourcesGainedPerTick } from './utils'
 import { Link } from 'react-router-dom'
+import { getResourcesGainedPerTick, getUnlockedResources } from './selectors'
 
-const ResourcesList = ({ unlocks, buildings, jobs, resources }) => {
-  const perTick = getResourcesGainedPerTick({ resources, buildings, jobs })
-  return (
-    <>
-      <Links unlocks={unlocks} />
-      <div className="flex flex-column">
-        {resources
-          .filter(resource =>
-            unlocks.find(unlock => unlock.name === resource.name)
-          )
-          .map(resource => (
-            <Resource
-              key={`resource-${resource.name}`}
-              {...resource}
-              max={resource.getMax(buildings)}
-              perSecond={(perTick[resource.name] * 5).toFixed(2)}
-            />
-          ))}
-      </div>
-    </>
-  )
-}
+const mapStateToProps = state => ({
+  resources: getUnlockedResources(state),
+  perTick: getResourcesGainedPerTick(state),
+  unlocks: state.unlocks,
+})
+
+const mapDispatchToProps = dispatch => ({})
+
+const ResourcesList = ({ unlocks, resources, perTick }) => (
+  <>
+    <Links unlocks={unlocks} />
+    <div className="flex flex-column">
+      {resources.map(resource => (
+        <Resource
+          key={`resource-${resource.name}`}
+          {...resource}
+          perSecond={(perTick[resource.name] * 5).toFixed(2)}
+        />
+      ))}
+    </div>
+  </>
+)
 
 const Resource = ({ name, value, max, color, perSecond }) => (
   <div className="flex flex-row" style={{ marginTop: 10 }}>
@@ -46,7 +46,13 @@ const Resource = ({ name, value, max, color, perSecond }) => (
   </div>
 )
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResourcesList)
+
 const Links = ({ unlocks }) => (
+  // TODO Labels should change based on level of related resources
   <div className="flex flex-column">
     <Link to="/">Bonfire</Link>
 
@@ -69,17 +75,3 @@ const Links = ({ unlocks }) => (
     </Link>
   </div>
 )
-
-const mapStateToProps = ({ unlocks, buildings, resources, jobs }) => ({
-  buildings,
-  resources,
-  jobs,
-  unlocks,
-})
-
-const mapDispatchToProps = dispatch => ({})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ResourcesList)

@@ -1,6 +1,6 @@
 import u from 'updeep'
 import data from '../constants'
-import { getResourcesGainedPerTick } from './utils'
+import { getResourcesGainedPerTick } from './selectors'
 import { updateSlice } from '../reducer'
 
 const updateResources = (...args) => updateSlice('resources', ...args)
@@ -24,7 +24,9 @@ const resourcesReducer = (state, action) => {
   }
 
   if (action.type === 'BUY_BUILDING' || action.type === 'BUY_SCIENCE') {
-    const { prices } = action.payload
+    const prices = action.payload.building
+      ? action.payload.building.prices
+      : action.payload.prices
     return u(updateResources(prices, state, { negated: true }), state).resources
   }
   return state.resources

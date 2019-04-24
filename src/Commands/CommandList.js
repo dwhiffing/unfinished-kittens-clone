@@ -1,5 +1,30 @@
 import { connect } from '../storeContext'
 import React from 'react'
+import { getEffectsForCommand, getUnlockedCommands } from './selectors'
+
+const mapStateToProps = state => ({
+  commands: getUnlockedCommands(state),
+})
+
+const mapDispatchToProps = (dispatch, props, state) => ({
+  triggerCommand: command => {
+    getEffectsForCommand(state, command).forEach(action => dispatch(action))
+  },
+})
+
+const CommandsList = ({ tab, commands, triggerCommand }) => (
+  <div className="flex flex-column">
+    {commands
+      .filter(command => command.tab === tab)
+      .map(command => (
+        <Command
+          key={`command-${command.name}`}
+          {...command}
+          onClick={() => triggerCommand(command)}
+        />
+      ))}
+  </div>
+)
 
 const Command = ({
   name,
@@ -13,42 +38,6 @@ const Command = ({
     <p>{summary}</p>
   </div>
 )
-
-const CommandsList = ({ tab, commands, triggerCommand, resources }) => (
-  <div className="flex flex-column">
-    {commands
-      .filter(command => command.tab === tab)
-      .map(command => (
-        <Command
-          key={`command-${command.name}`}
-          name={command.name}
-          color={command.color}
-          summary={command.summary()}
-          onClick={() => triggerCommand(command)}
-          canAfford={command.getCanAfford(resources)}
-        />
-      ))}
-  </div>
-)
-
-const mapStateToProps = ({ commands, resources }) => ({ commands, resources })
-
-const mapDispatchToProps = dispatch => ({
-  triggerCommand: ({ effects = [] }) => {
-    effects.forEach(effect => {
-      if (effect.type === 'updateResources') {
-        let payload = { ...effect.payload }
-        Object.entries(payload).forEach(([resource, amount]) => {
-          if (Array.isArray(amount)) {
-            payload[resource] =
-              amount[Math.floor(Math.random() * amount.length)]
-          }
-        })
-        dispatch({ type: 'UPDATE_RESOURCES', payload })
-      }
-    })
-  },
-})
 
 export default connect(
   mapStateToProps,

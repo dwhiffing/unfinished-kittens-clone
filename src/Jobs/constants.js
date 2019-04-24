@@ -1,4 +1,4 @@
-const data = [
+export default [
   {
     name: 'scavenger',
     value: 0,
@@ -15,7 +15,7 @@ const data = [
     value: 0,
     unlockRequirements: { folks: 1 },
     effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', value: 0.5 } },
+      { type: 'resourcePerTick', payload: { name: 'food', value: 0.2 } },
     ],
   },
   {
@@ -28,14 +28,3 @@ const data = [
     ],
   },
 ]
-
-const hydratedData = data.map(obj => ({
-  ...obj,
-  summary() {
-    return `${this.effects
-      .filter(({ type }) => type === 'resourcePerTick')
-      .map(({ payload }) => `${payload.value * 5} ${payload.name} /sec`)}`
-  },
-}))
-
-export default hydratedData
