@@ -15,3 +15,13 @@ const data = {
 }
 
 export default data
+
+export const INITIAL_MODELS = {
+  resources: [],
+  buildings: [],
+  commands: [],
+  jobs: [],
+  science: [],
+  tabs: [],
+  unlocks: [],
+}

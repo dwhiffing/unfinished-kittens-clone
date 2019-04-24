@@ -1,5 +1,5 @@
 import u from 'updeep'
-import { updateSlice, loadSlice } from '../reducer'
+import { updateSlice, loadSlice } from '../utils'
 
 const updateBuildings = (...args) => updateSlice('buildings', ...args)
 
