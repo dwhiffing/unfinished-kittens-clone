@@ -1,4 +1,4 @@
-const data = [
+export default [
   {
     name: 'shelter',
   },
@@ -15,9 +15,3 @@ const data = [
     },
   },
 ]
-
-const hydratedData = data.map(obj => ({
-  ...obj,
-}))
-
-export default hydratedData

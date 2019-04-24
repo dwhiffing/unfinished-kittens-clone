@@ -38,13 +38,7 @@ const JobsList = ({
           <Job
             key={job.name}
             {...job}
-            canAfford={availableWorkers > 0}
-            updateJobs={value =>
-              updateJobs({
-                name: job.name,
-                value,
-              })
-            }
+            updateJobs={value => updateJobs({ name: job.name, value })}
           />
         ))}
     </>

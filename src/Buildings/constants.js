@@ -11,7 +11,6 @@ export default [
     ],
   },
   {
-    // label, description, unlockRatio, unlockable, priceRatio, flavor
     name: 'field',
     tab: 'farm',
     value: 0,

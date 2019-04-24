@@ -7,6 +7,7 @@ export const getJobs = state =>
   state.jobs.map(job => ({
     ...job,
     summary: getJobSummary(state, job),
+    canAfford: getAvailableWorkers(state) > 0,
   }))
 
 export const getUnlockedJobs = state =>
