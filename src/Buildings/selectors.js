@@ -1,5 +1,17 @@
 import { getModel, getUnlock } from '../selectors'
 
+export const getBuilding = (state, name) => getModel(state, 'buildings', name)
+
+export const getBuildings = state =>
+  state.buildings.map(building => ({
+    ...building,
+    prices: getNextCostForBuilding(state, building),
+    canAfford: getCanAffordBuilding(state, building),
+  }))
+
+export const getUnlockedBuildings = state =>
+  getBuildings(state).filter(({ name }) => !!getUnlock(state, name))
+
 const getNextCostForBuilding = (state, building) => {
   const obj = {}
 
@@ -22,15 +34,3 @@ const getCanAffordBuilding = (state, building) => {
     ).length === 0
   )
 }
-
-export const getBuildings = state =>
-  state.buildings.map(building => ({
-    ...building,
-    prices: getNextCostForBuilding(state, building),
-    canAfford: getCanAffordBuilding(state, building),
-  }))
-
-export const getBuilding = (state, name) => getModel(state, 'buildings', name)
-
-export const getUnlockedBuildings = state =>
-  getBuildings(state).filter(({ name }) => !!getUnlock(state, name))
