@@ -1,17 +1,12 @@
 import u from 'updeep'
-import data from '../constants'
 import { getResourcesGainedPerTick } from './selectors'
-import { updateSlice } from '../reducer'
+import { updateSlice, loadSlice } from '../reducer'
 
 const updateResources = (...args) => updateSlice('resources', ...args)
 
 const resourcesReducer = (state, action) => {
   if (action.type === 'LOAD') {
-    const update = [...data.resources]
-    action.payload.resources.forEach((resource, index) => {
-      update[index].value = resource[1]
-    })
-    return update
+    return loadSlice('resources', action.payload)
   }
 
   if (action.type === 'TICK') {
@@ -29,6 +24,7 @@ const resourcesReducer = (state, action) => {
       : action.payload.prices
     return u(updateResources(prices, state, { negated: true }), state).resources
   }
+
   return state.resources
 }
 

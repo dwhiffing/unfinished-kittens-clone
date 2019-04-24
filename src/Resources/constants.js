@@ -22,3 +22,5 @@ export default [
     max: 0,
   },
 ]
+
+export const FOOD_DRAIN = 0.1

@@ -1,16 +1,11 @@
 import u from 'updeep'
-import data from '../constants'
-import { updateSlice } from '../reducer'
+import { updateSlice, loadSlice } from '../reducer'
 
 const updateJobs = (...args) => updateSlice('jobs', ...args)
 
 const jobsReducer = (state, action) => {
   if (action.type === 'LOAD') {
-    const update = [...data.jobs]
-    action.payload.jobs.forEach((job, index) => {
-      update[index].value = job[1]
-    })
-    return update
+    return loadSlice('jobs', action.payload)
   }
 
   if (action.type === 'UPDATE_JOBS') {

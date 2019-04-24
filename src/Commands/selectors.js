@@ -1,4 +1,4 @@
-import { getEffectsByType, getModel, getUnlock } from '../selectors'
+import { getEffect, getModel, getUnlock } from '../selectors'
 
 export const getCommand = (state, name) => getModel(state, 'commands', name)
 
@@ -13,7 +13,7 @@ export const getUnlockedCommands = state =>
   getCommands(state).filter(({ name }) => !!getUnlock(state, name))
 
 export const getEffectsForCommand = (state, command) => {
-  const effect = getEffectsByType(state, 'improveCommand').find(
+  const effect = getEffect(state, 'improveCommand').find(
     e => e.payload.name === command.name
   )
   const upgradeValue = effect ? effect.payload.value * effect.multiplier : 1

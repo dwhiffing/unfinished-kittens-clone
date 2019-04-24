@@ -16,7 +16,7 @@ export const getEffects = state => {
     .flat()
 }
 
-export const getEffectsByType = (state, type) => {
+export const getEffect = (state, type) => {
   return getEffects(state).filter(effect => effect.type === type)
 }
 
@@ -42,13 +42,13 @@ export const getNewUnlocks = state => {
   )
 }
 
-export const getModelMaxValue = (state, resource) => {
+export const getMaxValue = (state, resource) => {
   if (typeof resource.max !== 'number') {
     return Number.MAX_SAFE_INTEGER
   }
   return (
     resource.max +
-    getEffectsByType(state, 'maxResource').reduce((total, effect) => {
+    getEffect(state, 'maxResource').reduce((total, effect) => {
       const {
         payload: { name, value },
         multiplier,

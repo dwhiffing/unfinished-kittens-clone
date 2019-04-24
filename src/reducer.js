@@ -5,7 +5,7 @@ import commandsReducer from './commands/reducer'
 import scienceReducer from './science/reducer'
 import jobsReducer from './jobs/reducer'
 import u from 'updeep'
-import { getNewUnlocks, getModelIndex, getModelMaxValue } from './selectors'
+import { getNewUnlocks, getModelIndex, getMaxValue } from './selectors'
 
 export const INITIAL_MODELS = {
   resources: [],
@@ -34,12 +34,20 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
       ...resource,
       value: clamp(resource.value + (negated ? value * -1 : value), {
         min: 0,
-        max: getModelMaxValue(state, resource),
+        max: getMaxValue(state, resource),
       }),
     })
   })
 
   return updateToPush
+}
+
+export const loadSlice = (key, payload) => {
+  const update = [...data[key]]
+  payload[key].forEach((model, index) => {
+    update[index].value = model[1]
+  })
+  return update
 }
 
 const combineReducers = (reducers, initialState = {}) => {
