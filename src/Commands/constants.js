@@ -13,16 +13,4 @@ export default [
   //     },
   //   ],
   // },
-  {
-    name: 'harvest',
-    color: '#e6cc3b',
-    tab: 'farm',
-    effects: [{ type: 'updateResources', payload: { food: 50 } }],
-  },
-  {
-    name: 'chops',
-    color: '#e6cc3b',
-    tab: 'forestry',
-    effects: [{ type: 'updateResources', payload: { wood: 50 } }],
-  },
 ]
