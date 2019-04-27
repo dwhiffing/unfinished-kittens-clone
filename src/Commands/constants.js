@@ -7,8 +7,8 @@ export default [
       {
         type: 'updateResources',
         payload: {
-          food: 10 || [0.5, 0.75, 1],
-          wood: 10 || [0.01, 0.05, 0.1],
+          food: [0.5, 0.75, 1],
+          wood: [0.01, 0.05, 0.1],
         },
       },
     ],
