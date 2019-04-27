@@ -9,6 +9,7 @@ export const getUnlock = (state, name) => getModel(state, 'unlocks', name)
 export const getEffects = state => {
   return state.buildings
     .concat(state.jobs)
+    .concat(state.resources)
     .concat(state.science.filter(s => s.value > 0))
     .map(({ name, effects = [], value: multiplier } = {}) =>
       effects.map(effect => ({ ...effect, parentName: name, multiplier }))
@@ -38,7 +39,6 @@ export const getNewUnlocks = state => {
         const possibleUnlock = possibleUnlocks.find(
           ({ name }) => name === model
         )
-        // if (model === 'lumbermill') console.log(model, price, possibleUnlock)
         return possibleUnlock && possibleUnlock.value - price < 0
       }).length === 0
   )
@@ -57,5 +57,26 @@ export const getMaxValue = (state, resource) => {
       } = effect
       return name === resource.name ? total + value * multiplier : total
     }, 0)
+  )
+}
+
+export const getNextCostForModel = (state, model) => {
+  const obj = {}
+  Object.entries(model.prices || {}).forEach(([resource, price]) => {
+    obj[resource] = price * Math.pow(model.ratio || 1.12, model.value)
+  })
+  return obj
+}
+
+export const getCanAffordModel = (state, model) => {
+  return (
+    Object.entries(getNextCostForModel(state, model)).filter(
+      ([resourceName, prices]) => {
+        const resource = state.resources.find(
+          ({ name }) => name === resourceName
+        )
+        return resource.value - prices < 0
+      }
+    ).length === 0
   )
 }

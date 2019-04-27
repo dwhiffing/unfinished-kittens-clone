@@ -1,10 +1,10 @@
 import { connect } from '../storeContext'
 import React from 'react'
-import { getResourcesGainedPerTick, getUnlockedResources } from './selectors'
+import { getResourceDiffPerTick, getUnlockedResources } from './selectors'
 
 const mapStateToProps = state => ({
   resources: getUnlockedResources(state),
-  perTick: getResourcesGainedPerTick(state),
+  perTick: getResourceDiffPerTick(state),
   unlocks: state.unlocks,
 })
 

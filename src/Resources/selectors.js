@@ -1,7 +1,8 @@
-import { FOOD_DRAIN } from './constants'
-import { getModel, getUnlock, getMaxValue, getEffect } from '../selectors'
+import { CHEAT_FACTOR } from './constants'
+import { getUnlock, getMaxValue, getEffect, getModelIndex } from '../selectors'
 
-export const getResource = (state, name) => getModel(state, 'resources', name)
+export const getResource = (state, name) =>
+  getResources(state)[getModelIndex(state, 'resources', name)]
 
 export const getResources = state =>
   state.resources.map(resource => ({
@@ -12,29 +13,48 @@ export const getResources = state =>
 export const getUnlockedResources = state =>
   getResources(state).filter(({ name }) => !!getUnlock(state, name))
 
-export const getFoodDrain = state =>
-  parseInt(state.resources.find(r => r.name === 'folks').value + 1) * FOOD_DRAIN
-
 export const getEffectTotal = (state, effectName, instanceName) => {
-  return getEffect(state, effectName)
+  const value = getEffect(state, effectName)
     .filter(effect => effect.payload.name === instanceName)
     .reduce(
       (total, { payload: { value = 0 }, multiplier = 0 }) =>
         total + value * multiplier,
-      1
+      0
     )
+
+  return value === 0 ? 1 : value
 }
 
-export const getResourcesGainedPerTick = state => {
+const getResourcesGainedPerTick = state => {
   const obj = {}
-  getEffect(state, 'resourcePerTick').forEach(
-    ({ parentName, payload, multiplier }) => {
-      const { name, value } = payload
+  const effects = getEffect(state, 'resourcePerTick')
+  effects.forEach(
+    ({
+      parentName,
+      payload: { name: resourceName, value, useMultiplier = true },
+      multiplier,
+    }) => {
       multiplier *= getEffectTotal(state, 'improveJob', parentName)
-      obj[name] = obj[name] || 0
-      obj[name] += value * multiplier
+      if (!useMultiplier) {
+        multiplier = 1
+      }
+      obj[resourceName] = obj[resourceName] || 0
+      obj[resourceName] += value * multiplier * CHEAT_FACTOR
     }
   )
-  obj.food -= getFoodDrain(state)
+  return obj
+}
+
+export const getResourceDiffPerTick = state => {
+  const obj = getResourcesGainedPerTick(state)
+  Object.entries(obj).forEach(([resourceName, value]) => {
+    const resource = getResource(state, resourceName)
+    if (resource.value + value > resource.max) {
+      obj[resourceName] = resource.max - resource.value
+    }
+    if (resource.value === 0 && value < 0) {
+      obj[resourceName] = 0
+    }
+  })
   return obj
 }

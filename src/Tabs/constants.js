@@ -1,15 +1,16 @@
 export default [
   {
-    name: 'shelter',
+    name: 'forest',
     url: '',
   },
-  // {
-  //   name: 'field',
-  //   url: 'field',
-  //   unlockRequirements: {
-  //     food: 400,
-  //   },
-  // },
+  {
+    name: 'field',
+    url: 'field',
+    unlockRequirements: {
+      food: 400,
+      wood: 100,
+    },
+  },
   // {
   //   name: 'forestry',
   //   url: 'forestry',

@@ -1,8 +1,8 @@
 import u from 'updeep'
-import { getResourcesGainedPerTick } from './selectors'
+import { getResourceDiffPerTick } from './selectors'
 import { updateSlice, loadSlice } from '../utils'
 
-const updateResources = (...args) => updateSlice('resources', ...args)
+export const updateResources = (...args) => updateSlice('resources', ...args)
 
 const resourcesReducer = (state, { type, payload }) => {
   if (type === 'LOAD') {
@@ -10,7 +10,7 @@ const resourcesReducer = (state, { type, payload }) => {
   }
 
   if (type === 'TICK') {
-    const perTick = getResourcesGainedPerTick(state)
+    const perTick = getResourceDiffPerTick(state)
     return u(updateResources(perTick, state), state).resources
   }
 

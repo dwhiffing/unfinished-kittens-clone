@@ -1,5 +1,4 @@
-import { getModel, getUnlock } from '../selectors'
-import { getNextCostForModel } from '../buildings/selectors'
+import { getModel, getUnlock, getNextCostForModel } from '../selectors'
 
 export const getSciences = state =>
   state.science.map(science => ({
@@ -13,7 +12,9 @@ export const getSciences = state =>
 export const getScience = (state, name) => getModel(state, 'science', name)
 
 export const getUnlockedScience = state =>
-  getSciences(state).filter(({ name }) => !!getUnlock(state, name))
+  getSciences(state)
+    .filter(({ name }) => !!getUnlock(state, name))
+    .filter(science => !science.max || science.value < science.max)
 
 const getScienceAffordable = (state, science) => {
   return (

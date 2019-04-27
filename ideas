@@ -21,4 +21,38 @@ add tab for forestry
 add tab for mining
 
 
-need a feature to pay to unlock stuff after it's been triggered
+change game design
+
+player counts as folk
+no clicking for resources?
+player must move between jobs to manage early resources until they can get more workers
+early struggles are with having enough food to perform other tasks to produce resources for upgrades
+once player has basic upgrades, they can stockpile food to do other things
+once they can do other things, they can afford shelter and food for other workers, but this is a slow build up
+
+game concept is around locations based around a specific resource
+each location has tasks related to gathering and converting that resource
+workers can be assigned to each task
+upgrades can be purchased in each location to upgrade individual tasks
+
+first location is focused on scavenging food and wood initially, moves to wood and shelter
+second location is focused on growing food on a farm
+third locaton is focused on gathering stone and iron
+
+Forest
+  Resources: food, water, wood
+  Buildings
+    Lumbermill (wood, imrpoves lumber jobs and increases base value)
+    Trapper (wood, improves hunting job)
+    Cabin (wood, produces shelter and folks)
+  Jobs
+    scavenge food(a little food, a little wood)
+    collect water(a little water)
+    lumber(lots of wood)
+    hunt (lots of food)
+  Research
+    Rucksack
+    Nets
+    Axe
+    Spear
+    Traps

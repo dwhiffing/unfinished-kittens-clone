@@ -18,14 +18,15 @@ const BuildingsList = ({ tab, buildings, buyBuilding }) =>
       <Building
         key={building.name}
         {...building}
+        canAfford={building.canAfford && !building.isMaxed}
         onClick={() => building.canAfford && buyBuilding(building)}
       />
     ))
 
-const Building = ({ name, value, onClick, canAfford, prices }) => (
+const Building = ({ name, max, value, onClick, canAfford, prices }) => (
   <div className="button building" onClick={onClick}>
     <p style={{ color: canAfford ? 'white' : 'red' }}>
-      {name} ({value})
+      {name} ({value}/{max})
     </p>
     {Object.entries(prices).map(([resourceName, price]) => (
       <p
