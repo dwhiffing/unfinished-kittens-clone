@@ -7,7 +7,7 @@ export default [
     name: 'farm',
     url: 'farm',
     unlockRequirements: {
-      food: 1000,
+      food: 400,
     },
   },
   {

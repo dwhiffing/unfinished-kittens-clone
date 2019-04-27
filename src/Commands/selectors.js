@@ -1,4 +1,5 @@
 import { getEffect, getModel, getUnlock } from '../selectors'
+import React from 'react'
 
 export const getCommand = (state, name) => getModel(state, 'commands', name)
 
@@ -48,10 +49,14 @@ const getCommandSummary = (state, command) => {
         }
         const min = value[0] * upgradeValue
         const max = value[value.length - 1] * upgradeValue
-        return ` ${name}: ${min}-${max}`
+        return (
+          <p>
+            {name}: {min} - {max}
+          </p>
+        )
       })
     )
-  return data.join('')
+  return data
 }
 
 const getCommandPrices = (state, command) => {

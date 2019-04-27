@@ -2,8 +2,8 @@ export default [
   {
     name: 'hut',
     value: 0,
-    prices: { wood: 100 },
-    unlockRequirements: { wood: 50 },
+    prices: { wood: 5 },
+    unlockRequirements: { wood: 1 },
     tab: 'shelter',
     effects: [
       { type: 'maxResource', payload: { name: 'folks', value: 2 } },

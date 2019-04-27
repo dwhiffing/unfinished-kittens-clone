@@ -23,4 +23,4 @@ export default [
   },
 ]
 
-export const FOOD_DRAIN = 0.1
+export const FOOD_DRAIN = 0.05

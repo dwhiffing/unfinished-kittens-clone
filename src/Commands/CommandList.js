@@ -35,7 +35,7 @@ const Command = ({
 }) => (
   <div onClick={canAfford && onClick} className="button command">
     <p style={{ color: canAfford ? color : 'red' }}>{name}</p>
-    <p>{summary}</p>
+    {summary}
   </div>
 )
 

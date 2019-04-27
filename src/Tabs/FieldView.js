@@ -4,7 +4,7 @@ import Commands from '../commands/CommandList'
 import Jobs from '../jobs/JobList'
 import Science from '../science/ScienceList'
 
-const FarmView = () => (
+const FieldView = () => (
   <>
     <Commands tab="farm" />
     <Buildings tab="farm" />
@@ -13,4 +13,4 @@ const FarmView = () => (
   </>
 )
 
-export default FarmView
+export default FieldView

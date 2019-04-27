@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Shelter from './tabs/ShelterView'
-import Farm from './tabs/FarmView'
+import Farm from './tabs/FieldView'
 import Forestry from './tabs/ForestryView'
 import Resources from './resources/ResourceList'
 import TabList from './tabs/TabList'

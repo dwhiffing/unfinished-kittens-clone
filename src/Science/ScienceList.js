@@ -47,13 +47,14 @@ const ScienceItem = ({
     <p style={{ color: !canAfford && !isPurchased ? 'red' : 'white' }}>
       {name}
     </p>
-    {Object.entries(prices).map(([resourceName, price]) => (
-      <p
-        key={`key-${resourceName}`}
-        style={{ color: !canAfford && !isPurchased ? 'red' : 'white' }}>
-        {resourceName}: {price.toFixed(2)}
-      </p>
-    ))}
+    {!isPurchased &&
+      Object.entries(prices).map(([resourceName, price]) => (
+        <p
+          key={`key-${resourceName}`}
+          style={{ color: !canAfford && !isPurchased ? 'red' : 'white' }}>
+          {resourceName}: {price.toFixed(2)}
+        </p>
+      ))}
     <p>{summary}</p>
   </div>
 )
