@@ -4,15 +4,15 @@ import Commands from '../commands/CommandList'
 import Jobs from '../jobs/JobList'
 import Science from '../science/ScienceList'
 
-const ShelterView = () => {
+const forestView = () => {
   return (
     <>
-      <Commands tab="shelter" />
-      <Buildings tab="shelter" />
-      <Jobs tab="shelter" />
-      <Science tab="shelter" />
+      <Commands tab="forest" />
+      <Buildings tab="forest" />
+      <Jobs tab="forest" />
+      <Science tab="forest" />
     </>
   )
 }
 
-export default ShelterView
+export default forestView

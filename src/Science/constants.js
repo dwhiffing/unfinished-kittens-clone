@@ -1,7 +1,7 @@
 export default [
   {
     name: 'hunt+',
-    tab: 'shelter',
+    tab: 'forest',
     labels: ['spear', 'sharper spear', 'sword'],
     max: 3,
     ratio: 3,
@@ -14,7 +14,7 @@ export default [
     name: 'scavenge+',
     labels: ['rucksack', 'bigger rucksack', 'axe'],
     max: 3,
-    tab: 'shelter',
+    tab: 'forest',
     ratio: 3,
     prices: { wood: 5 },
     unlockRequirements: { wood: 2.5 },

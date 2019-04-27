@@ -2,7 +2,7 @@ export default [
   // {
   //   name: 'scavenge',
   //   color: '#e6cc3b',
-  //   tab: 'shelter',
+  //   tab: 'forest',
   //   effects: [
   //     {
   //       type: 'updateResources',

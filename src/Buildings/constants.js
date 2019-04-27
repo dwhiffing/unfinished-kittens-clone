@@ -6,7 +6,7 @@ export default [
     ratio: 1,
     prices: { wood: 10 },
     unlockRequirements: { wood: 5 },
-    tab: 'shelter',
+    tab: 'forest',
     effects: [
       { type: 'maxResource', payload: { name: 'food', value: 50 } },
       { type: 'maxResource', payload: { name: 'wood', value: 10 } },
@@ -19,12 +19,12 @@ export default [
     ratio: 1,
     max: 1,
     unlockRequirements: { wood: 25 },
-    tab: 'shelter',
+    tab: 'forest',
     effects: [{ type: 'maxResource', payload: { name: 'folks', value: 1 } }],
   },
   {
     name: 'lumbermill',
-    tab: 'shelter',
+    tab: 'forest',
     value: 0,
     prices: { wood: 200 },
     unlockRequirements: { wood: 200 },

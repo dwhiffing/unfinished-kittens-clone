@@ -2,7 +2,7 @@ export default [
   {
     name: 'hunt',
     value: 0,
-    tab: 'shelter',
+    tab: 'forest',
     unlockRequirements: { folks: 1 },
     effects: [
       { type: 'resourcePerTick', payload: { name: 'food', value: 0.3 } },
@@ -11,7 +11,7 @@ export default [
   {
     name: 'scavenge',
     value: 0,
-    tab: 'shelter',
+    tab: 'forest',
     unlockRequirements: { folks: 1 },
     effects: [
       { type: 'resourcePerTick', payload: { name: 'wood', value: 0.02 } },
