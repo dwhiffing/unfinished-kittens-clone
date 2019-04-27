@@ -5,26 +5,26 @@ export const getBuilding = (state, name) => getModel(state, 'buildings', name)
 export const getBuildings = state =>
   state.buildings.map(building => ({
     ...building,
-    prices: getNextCostForBuilding(state, building),
-    canAfford: getCanAffordBuilding(state, building),
+    prices: getNextCostForModel(state, building),
+    canAfford: getCanAffordModel(state, building),
   }))
 
 export const getUnlockedBuildings = state =>
   getBuildings(state).filter(({ name }) => !!getUnlock(state, name))
 
-const getNextCostForBuilding = (state, building) => {
+export const getNextCostForModel = (state, model) => {
   const obj = {}
 
-  Object.entries(building.prices || {}).forEach(([resource, price]) => {
-    obj[resource] = price * Math.pow(1.12, building.value)
+  Object.entries(model.prices || {}).forEach(([resource, price]) => {
+    obj[resource] = price * Math.pow(1.12, model.value)
   })
 
   return obj
 }
 
-const getCanAffordBuilding = (state, building) => {
+export const getCanAffordModel = (state, model) => {
   return (
-    Object.entries(getNextCostForBuilding(state, building)).filter(
+    Object.entries(getNextCostForModel(state, model)).filter(
       ([resourceName, prices]) => {
         const resource = state.resources.find(
           ({ name }) => name === resourceName

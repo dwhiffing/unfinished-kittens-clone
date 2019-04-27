@@ -1,5 +1,5 @@
 import { getModel, getUnlock } from '../selectors'
-import { getResource } from '../resources/selectors'
+import { getResource, getEffectTotal } from '../resources/selectors'
 
 export const getJob = (state, name) => getModel(state, 'jobs', name)
 
@@ -25,5 +25,10 @@ export const getAvailableWorkers = state =>
 const getJobSummary = (state, job) => {
   return `${job.effects
     .filter(({ type }) => type === 'resourcePerTick')
-    .map(({ payload }) => `${payload.value * 5} ${payload.name} /sec`)}`
+    .map(({ payload }) => {
+      const multiplier = getEffectTotal(state, 'improveJob', job.name)
+      return `${(payload.value * 5 * multiplier).toFixed(2)} ${
+        payload.name
+      } /sec`
+    })}`
 }

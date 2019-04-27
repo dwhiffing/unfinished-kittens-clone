@@ -37,6 +37,7 @@ const getCommandSummary = (state, command) => {
   const upgradeValue = state.science
     .filter(s => s.value > 0)
     .map(s => s.effects.find(e => e.type === 'improveCommand'))
+    .filter(e => !!e)
     .filter(e => e.payload.name === command.name)
     .reduce((prev, effect) => prev * effect.payload.value, 1)
 

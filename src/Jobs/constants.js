@@ -1,23 +1,38 @@
 export default [
   {
-    name: 'scavenger',
+    name: 'scavenge',
     value: 0,
     tab: 'shelter',
     unlockRequirements: { folks: 1 },
-    effects: [{ type: 'performJob', payload: { name: 'scavenge' } }],
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'food', value: 0.4 } },
+    ],
+  },
+  {
+    name: 'twigs',
+    value: 0,
+    tab: 'shelter',
+    unlockRequirements: { folks: 1 },
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'wood', value: 0.0075 } },
+    ],
   },
   {
     name: 'farmer',
-    tab: 'farm',
+    tab: 'shelter',
     value: 0,
-    unlockRequirements: { folks: 1 },
-    effects: [{ type: 'performJob', payload: { name: 'food' } }],
+    unlockRequirements: { farm: 1 },
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'food', value: 0.2 } },
+    ],
   },
   {
-    name: 'woodcutter',
-    tab: 'forestry',
+    name: 'chop',
+    tab: 'shelter',
     value: 0,
-    unlockRequirements: { folks: 1 },
-    effects: [{ type: 'performJob', payload: { name: 'wood' } }],
+    unlockRequirements: { lumbermill: 1 },
+    effects: [
+      { type: 'resourcePerTick', payload: { name: 'wood', value: 0.02 } },
+    ],
   },
 ]

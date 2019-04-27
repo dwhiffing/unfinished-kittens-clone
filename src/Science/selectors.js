@@ -1,11 +1,13 @@
 import { getModel, getUnlock } from '../selectors'
+import { getNextCostForModel } from '../buildings/selectors'
 
 export const getSciences = state =>
   state.science.map(science => ({
     ...science,
     summary: getScienceSummary(state, science),
     canAfford: getScienceAffordable(state, science),
-    isPurchased: science.value > 0,
+    isPurchased: science.value > 0 && science.max === 1,
+    prices: getNextCostForModel(state, science),
   }))
 
 export const getScience = (state, name) => getModel(state, 'science', name)
@@ -15,16 +17,20 @@ export const getUnlockedScience = state =>
 
 const getScienceAffordable = (state, science) => {
   return (
-    science.value === 0 &&
-    Object.entries(science.prices).filter(([resourceName, prices]) => {
-      const resource = state.resources.find(({ name }) => name === resourceName)
-      return resource.value - prices < 0
-    }).length === 0
+    (!science.max || science.value < science.max) &&
+    Object.entries(getNextCostForModel(state, science)).filter(
+      ([resourceName, prices]) => {
+        const resource = state.resources.find(
+          ({ name }) => name === resourceName
+        )
+        return resource.value - prices < 0
+      }
+    ).length === 0
   )
 }
 
 const getScienceSummary = (state, science) => {
-  const effect = science.effects.find(({ type }) => type === 'improveCommand')
-
-  return `${effect.payload.name} value * ${effect.payload.value}`
+  return science.effects
+    .map(effect => `${effect.payload.name} value * ${effect.payload.value}`)
+    .join('')
 }

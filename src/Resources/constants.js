@@ -16,10 +16,9 @@ export default [
   },
   {
     name: 'folks',
-    unlockRequirements: { folks: 0.01 },
-    value: 0,
+    value: 1,
     color: 'purple',
-    max: 0,
+    max: 1,
   },
 ]
 

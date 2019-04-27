@@ -10,8 +10,8 @@ export const getEffects = state => {
   return state.buildings
     .concat(state.jobs)
     .concat(state.science.filter(s => s.value > 0))
-    .map(({ effects = [], value: multiplier } = {}) =>
-      effects.map(effect => ({ ...effect, multiplier }))
+    .map(({ name, effects = [], value: multiplier } = {}) =>
+      effects.map(effect => ({ ...effect, parentName: name, multiplier }))
     )
     .flat()
 }
@@ -34,11 +34,13 @@ export const getNewUnlocks = state => {
     unlockable =>
       !unlockable.unlockRequirements ||
       !!getUnlock(state, unlockable.name) ||
-      Object.entries(unlockable.unlockRequirements).filter(
-        ([resource, price]) =>
-          state.resources.find(({ name }) => name === resource).value - price <
-          0
-      ).length === 0
+      Object.entries(unlockable.unlockRequirements).filter(([model, price]) => {
+        const possibleUnlock = possibleUnlocks.find(
+          ({ name }) => name === model
+        )
+        // if (model === 'lumbermill') console.log(model, price, possibleUnlock)
+        return possibleUnlock && possibleUnlock.value - price < 0
+      }).length === 0
   )
 }
 

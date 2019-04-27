@@ -34,6 +34,7 @@ const ScienceView = ({ tab, science, buyScience }) => {
 
 const ScienceItem = ({
   name,
+  value,
   isPurchased,
   onClick,
   canAfford,
@@ -45,7 +46,7 @@ const ScienceItem = ({
     onClick={onClick}
     style={{ opacity: isPurchased ? 0.5 : 1 }}>
     <p style={{ color: !canAfford && !isPurchased ? 'red' : 'white' }}>
-      {name}
+      {name} ({value})
     </p>
     {!isPurchased &&
       Object.entries(prices).map(([resourceName, price]) => (

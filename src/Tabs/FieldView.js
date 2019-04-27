@@ -6,10 +6,10 @@ import Science from '../science/ScienceList'
 
 const FieldView = () => (
   <>
-    <Commands tab="farm" />
-    <Buildings tab="farm" />
-    <Jobs tab="farm" />
-    <Science tab="farm" />
+    <Commands tab="field" />
+    <Buildings tab="field" />
+    <Jobs tab="field" />
+    <Science tab="field" />
   </>
 )
 

@@ -4,8 +4,8 @@ export default [
     url: '',
   },
   {
-    name: 'farm',
-    url: 'farm',
+    name: 'field',
+    url: 'field',
     unlockRequirements: {
       food: 400,
     },

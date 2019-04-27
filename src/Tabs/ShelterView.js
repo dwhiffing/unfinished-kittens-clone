@@ -5,7 +5,6 @@ import Jobs from '../jobs/JobList'
 import Science from '../science/ScienceList'
 
 const ShelterView = () => {
-  console.log('trest')
   return (
     <>
       <Commands tab="shelter" />

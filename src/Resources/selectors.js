@@ -12,15 +12,29 @@ export const getResources = state =>
 export const getUnlockedResources = state =>
   getResources(state).filter(({ name }) => !!getUnlock(state, name))
 
+export const getFoodDrain = state =>
+  parseInt(state.resources.find(r => r.name === 'folks').value + 1) * FOOD_DRAIN
+
+export const getEffectTotal = (state, effectName, instanceName) => {
+  return getEffect(state, effectName)
+    .filter(effect => effect.payload.name === instanceName)
+    .reduce(
+      (total, { payload: { value = 0 }, multiplier = 0 }) =>
+        total + value * multiplier,
+      1
+    )
+}
+
 export const getResourcesGainedPerTick = state => {
   const obj = {}
-  getEffect(state, 'resourcePerTick').forEach(({ payload, multiplier }) => {
-    const { name, value } = payload
-    obj[name] = obj[name] || 0
-    obj[name] += value * multiplier
-  })
-  obj.food -=
-    parseInt(state.resources.find(r => r.name === 'folks').value + 1) *
-    FOOD_DRAIN
+  getEffect(state, 'resourcePerTick').forEach(
+    ({ parentName, payload, multiplier }) => {
+      const { name, value } = payload
+      multiplier *= getEffectTotal(state, 'improveJob', parentName)
+      obj[name] = obj[name] || 0
+      obj[name] += value * multiplier
+    }
+  )
+  obj.food -= getFoodDrain(state)
   return obj
 }

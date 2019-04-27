@@ -5,9 +5,11 @@ import {
   getAvailableWorkers,
   getTotalWorkers,
 } from './selectors'
+import { getFoodDrain } from '../resources/selectors'
 
 const mapStateToProps = state => ({
   jobs: getUnlockedJobs(state),
+  foodDrain: getFoodDrain(state),
   availableWorkers: getAvailableWorkers(state),
   totalWorkers: getTotalWorkers(state),
 })
@@ -22,6 +24,7 @@ const JobsList = ({
   updateJobs,
   availableWorkers,
   totalWorkers,
+  foodDrain,
 }) => {
   if (totalWorkers === 0 || jobs.length === 0) {
     return false
@@ -32,6 +35,7 @@ const JobsList = ({
       <p>
         Available workers: {availableWorkers}/{totalWorkers}
       </p>
+      <p>Food consumption: -{foodDrain * 5} /sec</p>
       {jobs
         .filter(job => !tab || job.tab === tab)
         .map(job => (

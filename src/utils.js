@@ -7,9 +7,7 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
   const updateToPush = {
     [key]: {},
   }
-  Object.keys(updates).forEach(resourceName => {
-    const value = updates[resourceName]
-
+  Object.entries(updates).forEach(([resourceName, value]) => {
     updateToPush[key][getModelIndex(state, key, resourceName)] = resource => ({
       ...resource,
       value: clamp(resource.value + (negated ? value * -1 : value), {

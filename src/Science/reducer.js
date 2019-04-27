@@ -10,6 +10,7 @@ const scienceReducer = (state, action) => {
 
   if (action.type === 'BUY_SCIENCE') {
     const { name } = action.payload
+    console.log(u(updateScience({ [name]: 1 }, state), state).science)
     return u(updateScience({ [name]: 1 }, state), state).science
   }
   return state.science
