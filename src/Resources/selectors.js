@@ -27,14 +27,16 @@ export const getEffectTotal = (state, effectName, instanceName) => {
 
 const getResourcesGainedPerTick = state => {
   const obj = {}
-  const effects = getEffect(state, 'resourcePerTick')
+  const effects = getEffect(state, 'resourcePerTick').filter(
+    ({ parent }) => parent.value > 0
+  )
   effects.forEach(
     ({
-      parentName,
+      parent,
       payload: { name: resourceName, value, useMultiplier = true },
       multiplier,
     }) => {
-      multiplier *= getEffectTotal(state, 'improveJob', parentName)
+      multiplier *= getEffectTotal(state, 'improveJob', parent.name)
       if (!useMultiplier) {
         multiplier = 1
       }

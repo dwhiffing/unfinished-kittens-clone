@@ -1,3 +1,5 @@
+export const CHEAT_FACTOR = 1
+
 export default [
   {
     // title, type(common, rare, etc), visible, calculatePerTick, color
@@ -9,7 +11,7 @@ export default [
     effects: [
       {
         type: 'resourcePerTick',
-        payload: { name: 'folks', value: 0.01, useMultiplier: false },
+        payload: { name: 'folks', value: 0.0052, useMultiplier: false },
       },
     ],
   },
@@ -28,7 +30,7 @@ export default [
     effects: [
       {
         type: 'resourcePerTick',
-        payload: { name: 'food', value: -0.2 },
+        payload: { name: 'food', value: -0.2 / CHEAT_FACTOR },
       },
       {
         type: 'resourcePerTick',
@@ -37,5 +39,3 @@ export default [
     ],
   },
 ]
-
-export const CHEAT_FACTOR = 1

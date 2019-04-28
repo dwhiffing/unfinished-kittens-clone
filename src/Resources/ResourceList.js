@@ -16,7 +16,7 @@ const ResourcesList = ({ unlocks, resources, perTick }) => (
       <Resource
         key={`resource-${resource.name}`}
         {...resource}
-        perSecond={(perTick[resource.name] * 5).toFixed(2)}
+        perSecond={(perTick[resource.name] || 0) * 5}
       />
     ))}
   </div>
@@ -34,10 +34,12 @@ const Resource = ({ name, value, max, color, perSecond }) => (
           <span style={{ color: '#aaa' }}> /{max}</span>
         </p>
       </div>
-      <p style={{ marginLeft: -5, fontSize: 11 }}>
-        {perSecond > 0 && '+'}
-        {perSecond}/sec
-      </p>
+      {perSecond !== 0 && (
+        <p style={{ marginLeft: -5, fontSize: 11 }}>
+          {perSecond > 0 && '+'}
+          {perSecond.toFixed(2)}/sec
+        </p>
+      )}
     </div>
   </div>
 )

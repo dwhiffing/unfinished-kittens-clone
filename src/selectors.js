@@ -11,9 +11,14 @@ export const getEffects = state => {
     .concat(state.jobs)
     .concat(state.resources)
     .concat(state.science.filter(s => s.value > 0))
-    .map(({ name, effects = [], value: multiplier } = {}) =>
-      effects.map(effect => ({ ...effect, parentName: name, multiplier }))
-    )
+    .map(effectable => {
+      const effects = effectable.effects || []
+      return effects.map(effect => ({
+        ...effect,
+        parent: effectable,
+        multiplier: effectable.value,
+      }))
+    })
     .flat()
 }
 
