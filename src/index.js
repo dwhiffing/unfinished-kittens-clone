@@ -20,7 +20,7 @@ ReactDOM.render(
         <div style={{ flex: 2, padding: 10 }}>
           <div>
             <Route exact path="/" component={Forest} />
-            <Route exact path="/farm" component={Field} />
+            <Route exact path="/field" component={Field} />
           </div>
         </div>
       </div>

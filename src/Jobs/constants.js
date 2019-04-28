@@ -17,4 +17,13 @@ export default [
       { type: 'resourcePerTick', payload: { name: 'wood', value: 0.02 } },
     ],
   },
+  // {
+  //   name: 'farm',
+  //   value: 0,
+  //   tab: 'field',
+  //   unlockRequirements: { plot: 1 },
+  //   effects: [
+  //     { type: 'resourcePerTick', payload: { name: 'food', value: 0.5 } },
+  //   ],
+  // },
 ]

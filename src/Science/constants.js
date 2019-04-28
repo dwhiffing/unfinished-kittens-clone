@@ -21,4 +21,15 @@ export default [
     value: 0,
     effects: [{ type: 'improveJob', payload: { name: 'scavenge', value: 4 } }],
   },
+  {
+    name: 'farm+',
+    labels: ['rucksack', 'bigger rucksack', 'axe'],
+    max: 3,
+    tab: 'field',
+    ratio: 3,
+    prices: { food: 500, wood: 100 },
+    unlockRequirements: { wood: 2.5 },
+    value: 0,
+    effects: [{ type: 'improveJob', payload: { name: 'farm', value: 4 } }],
+  },
 ]
