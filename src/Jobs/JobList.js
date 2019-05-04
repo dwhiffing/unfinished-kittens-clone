@@ -1,3 +1,4 @@
+import { getFoodDrain } from './../resources/selectors'
 import { connect } from '../storeContext'
 import React from 'react'
 import {
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
   jobs: getUnlockedJobs(state),
   availableWorkers: getAvailableWorkers(state),
   totalWorkers: getTotalWorkers(state),
+  foodDrain: getFoodDrain(state),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -24,7 +26,10 @@ const JobsList = ({
   totalWorkers,
   foodDrain,
 }) => {
-  if (totalWorkers === 0 || jobs.length === 0) {
+  if (
+    totalWorkers === 0 ||
+    jobs.filter(job => !tab || job.tab === tab).length === 0
+  ) {
     return false
   }
 
@@ -33,6 +38,7 @@ const JobsList = ({
       <p>
         Available workers: {availableWorkers}/{totalWorkers}
       </p>
+      <p>Food drain: {foodDrain.toFixed(2)}</p>
       {jobs
         .filter(job => !tab || job.tab === tab)
         .map(job => (
@@ -46,10 +52,13 @@ const JobsList = ({
   )
 }
 
-const Job = ({ name, value, updateJobs, canAfford, summary }) => (
-  <div className="flex justify-between align-center job">
+const Job = ({ name, max, value, updateJobs, canAfford, summary }) => (
+  <div
+    className="flex justify-between align-center job"
+    style={{ opacity: value === max ? 0.5 : 1 }}>
     <p style={{ color: canAfford ? 'white' : 'red' }}>
-      {name} ({value})
+      {name} ({value}
+      {max < 1000 ? `/${max}` : ''})
     </p>
     <p>{summary}</p>
     <div className="flex">

@@ -49,18 +49,18 @@ export const getNewUnlocks = state => {
   )
 }
 
-export const getMaxValue = (state, resource) => {
-  if (typeof resource.max !== 'number') {
+export const getMaxValue = (state, model) => {
+  if (typeof model.max !== 'number') {
     return Number.MAX_SAFE_INTEGER
   }
   return (
-    resource.max +
-    getEffect(state, 'maxResource').reduce((total, effect) => {
+    model.max +
+    getEffect(state, '+max').reduce((total, effect) => {
       const {
         payload: { name, value },
         multiplier,
       } = effect
-      return name === resource.name ? total + value * multiplier : total
+      return name === model.name ? total + value * multiplier : total
     }, 0)
   )
 }

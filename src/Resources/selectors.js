@@ -33,10 +33,18 @@ const getResourcesGainedPerTick = state => {
   effects.forEach(
     ({
       parent,
-      payload: { name: resourceName, value, useMultiplier = true },
+      payload: {
+        name: resourceName,
+        value,
+        useMultiplier = true,
+        integer = false,
+      },
       multiplier,
     }) => {
       multiplier *= getEffectTotal(state, 'improveJob', parent.name)
+      if (integer) {
+        multiplier = Math.ceil(multiplier)
+      }
       if (!useMultiplier) {
         multiplier = 1
       }
@@ -60,3 +68,14 @@ export const getResourceDiffPerTick = state => {
   })
   return obj
 }
+
+export const getFoodDrain = state =>
+  Math.abs(
+    getEffect(state, 'resourcePerTick')
+      .filter(({ payload }) => payload.name === 'food' && payload.value < 0)
+      .reduce(
+        (total, { payload: { value }, multiplier }) =>
+          total + value * Math.ceil(multiplier),
+        0
+      )
+  ) * 5

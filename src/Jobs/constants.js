@@ -5,7 +5,7 @@ export default [
     tab: 'forest',
     unlockRequirements: { folks: 1 },
     effects: [
-      { type: 'resourcePerTick', payload: { name: 'food', value: 0.3 } },
+      { type: 'resourcePerTick', payload: { name: 'food', value: 1.2 } },
     ],
   },
   {
@@ -14,16 +14,15 @@ export default [
     tab: 'forest',
     unlockRequirements: { folks: 1 },
     effects: [
-      { type: 'resourcePerTick', payload: { name: 'wood', value: 0.02 } },
+      { type: 'resourcePerTick', payload: { name: 'wood', value: 0.03 } },
     ],
   },
-  // {
-  //   name: 'farm',
-  //   value: 0,
-  //   tab: 'field',
-  //   unlockRequirements: { plot: 1 },
-  //   effects: [
-  //     { type: 'resourcePerTick', payload: { name: 'food', value: 0.5 } },
-  //   ],
-  // },
+  {
+    name: 'farm',
+    value: 0,
+    max: 0,
+    tab: 'field',
+    unlockRequirements: { plot: 1 },
+    effects: [{ type: 'resourcePerTick', payload: { name: 'food', value: 2 } }],
+  },
 ]

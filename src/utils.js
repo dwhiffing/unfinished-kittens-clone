@@ -22,7 +22,9 @@ export const updateSlice = (key, updates, state, { negated } = {}) => {
 export const loadSlice = (key, payload) => {
   const update = [...data[key]]
   payload[key].forEach((model, index) => {
-    update[index].value = model[1]
+    if (update[index]) {
+      update[index].value = model[1]
+    }
   })
   return update
 }

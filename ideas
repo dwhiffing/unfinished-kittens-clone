@@ -35,24 +35,38 @@ each location has tasks related to gathering and converting that resource
 workers can be assigned to each task
 upgrades can be purchased in each location to upgrade individual tasks
 
-first location is focused on scavenging food and wood initially, moves to wood and shelter
-second location is focused on growing food on a farm
-third locaton is focused on gathering stone and iron
+first location is focused on scavenging food and wood
+second location is focused on growing food on a farm, allows shelter in first location
+third locaton is focused on gathering stone and iron, allows crafting
 
 Forest
-  Resources: food, water, wood
+  Resources: food, wood
   Buildings
     Lumbermill (wood, imrpoves lumber jobs and increases base value)
     Trapper (wood, improves hunting job)
     Cabin (wood, produces shelter and folks)
   Jobs
-    scavenge food(a little food, a little wood)
-    collect water(a little water)
-    lumber(lots of wood)
-    hunt (lots of food)
+    scavenge(wood + seeds)
+    hunt (food)
   Research
-    Rucksack
-    Nets
-    Axe
-    Spear
-    Traps
+    +scavenge
+    +hunt
+
+Field
+  Resources: seeds, food, livestock
+  Buildings:
+    Plot (turns seeds into food)
+  Jobs
+    Farmer (turns seeds into food)
+  Research
+
+
+types of Buildings
+  storage
+    increases storage for a variety of resources
+  production
+    allows worker of certain type
+    may also increase storage?
+  conversion
+    allows worker of certain type
+    converts one resource to another

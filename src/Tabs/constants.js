@@ -7,7 +7,7 @@ export default [
     name: 'field',
     url: 'field',
     unlockRequirements: {
-      wood: 100,
+      hut: 5,
     },
   },
 ]
