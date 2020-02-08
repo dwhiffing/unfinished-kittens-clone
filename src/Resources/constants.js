@@ -1,4 +1,4 @@
-export const CHEAT_FACTOR = 1
+export const CHEAT_FACTOR = 2
 
 export default [
   {
@@ -23,6 +23,13 @@ export default [
     max: 0,
   },
   {
+    name: 'stone',
+    value: 0,
+    unlockRequirements: { stone: 0.01 },
+    color: '#999999',
+    max: 0,
+  },
+  {
     name: 'folks',
     value: 1,
     color: 'purple',
@@ -30,7 +37,7 @@ export default [
     effects: [
       {
         type: 'resourcePerTick',
-        payload: { name: 'food', value: -1 / CHEAT_FACTOR, integer: true },
+        payload: { name: 'food', value: -0.8 / CHEAT_FACTOR, integer: true },
       },
       {
         type: 'resourcePerTick',

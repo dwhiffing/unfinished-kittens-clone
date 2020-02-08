@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import Forest from './tabs/ForestView'
 import Field from './tabs/FieldView'
+import Hill from './tabs/HillView'
 import Resources from './resources/ResourceList'
 import TabList from './tabs/TabList'
 import { StoreProvider } from './storeContext'
@@ -21,6 +22,7 @@ ReactDOM.render(
           <div>
             <Route exact path="/" component={Forest} />
             <Route exact path="/field" component={Field} />
+            <Route exact path="/hill" component={Hill} />
           </div>
         </div>
       </div>

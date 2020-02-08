@@ -1,6 +1,6 @@
 export default [
   // {
-  //   name: 'scavenge',
+  //   name: 'scavenger',
   //   color: '#e6cc3b',
   //   tab: 'forest',
   //   effects: [

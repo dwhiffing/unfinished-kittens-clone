@@ -10,4 +10,11 @@ export default [
       hut: 5,
     },
   },
+  {
+    name: 'hill',
+    url: 'hill',
+    unlockRequirements: {
+      food: 1500,
+    },
+  },
 ]
