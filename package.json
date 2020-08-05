@@ -121,6 +121,7 @@
       "react-app"
     ]
   },
+  "homepage": "https://dwhiffing.github.io/incremental/",
   "devDependencies": {
     "gh-pages": "^2.0.1"
   }

@@ -3,17 +3,17 @@ import { connect } from '../storeContext'
 import { Link } from 'react-router-dom'
 import { getUnlockedTabs } from './selectors'
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   tabs: getUnlockedTabs(state),
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = (dispatch) => ({})
 
 // TODO Labels should change based on level of related resources
 const TabList = ({ tabs }) => (
   <div className="flex flex-column">
-    {tabs.map(tab => (
-      <Link key={`link-${tab.name}`} to={`/${tab.url}`}>
+    {tabs.map((tab) => (
+      <Link key={`link-${tab.name}`} to={`${tab.url}`}>
         {tab.name}
       </Link>
     ))}
@@ -24,15 +24,14 @@ const TabList = ({ tabs }) => (
 
         if (shouldReset) {
           localStorage.removeItem('save')
+          window.stopSave = true
           document.location.reload()
         }
-      }}>
+      }}
+    >
       reset
     </Link>
   </div>
 )
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TabList)
+export default connect(mapStateToProps, mapDispatchToProps)(TabList)

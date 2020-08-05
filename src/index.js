@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, HashRouter as Router } from 'react-router-dom'
 
 import Forest from './tabs/ForestView'
 import Field from './tabs/FieldView'
@@ -28,5 +28,5 @@ ReactDOM.render(
       </div>
     </Router>
   </StoreProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

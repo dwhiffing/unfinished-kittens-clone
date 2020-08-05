@@ -13,7 +13,7 @@ export const initialState = {
   ...data,
 }
 
-const tabs = state => state.tabs
+const tabs = (state) => state.tabs
 
 const unlocks = (state, action) => {
   //TODO: This shouldn't be here
@@ -24,7 +24,9 @@ const unlocks = (state, action) => {
     obj.science = state.science.map(({ name, value }) => [name, value])
     obj.jobs = state.jobs.map(({ name, value }) => [name, value])
     obj.unlocks = state.unlocks
-    localStorage.setItem('save', JSON.stringify(obj))
+    if (!window.stopSave) {
+      localStorage.setItem('save', JSON.stringify(obj))
+    }
   }
 
   if (action.type === 'LOAD') {
@@ -40,7 +42,7 @@ const unlocks = (state, action) => {
 
 const reducer = combineReducers(
   { resources, commands, buildings, science, jobs, unlocks, tabs },
-  initialState
+  initialState,
 )
 
 export default reducer
